@@ -27,9 +27,20 @@ class BaseAction extends Controller {
    		$this->assign('areaId2',$areaId2);
    		$this->assign('template_path',$template_path);
    		$this->assign('CONF',$GLOBALS['CONFIG']);
+		$this->assign('ifUserMember', $this->ifUserMember());
 		$this->footer(); //加入底部
 	}
-	
+
+	public function ifUserMember(){
+		$USER = session('WST_USER');
+		$userId = $USER["userID"];
+		$usersMmeber = M("users_mmeber")->find($userId);
+		if(!empty($usersMmeber)){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
 	/**
 	 * 生成URL
 	 */
