@@ -1,0 +1,94 @@
+<extend name="./Apps/Home/View/default/members/layout.html" />
+<block name="content">
+<div>
+	<div class='wst-page-header'>
+		交友中心&nbsp;>&nbsp;概览
+	</div>
+
+	<div class='wst-shophome-area'>
+		<div class='wst-shophome-nav'>
+			<div class='header'>
+				好友提示
+			</div>
+			<div class='main'>
+				<div style="font-weight:bolder;">团队信息</div>
+				<div style="color:#55AAFF;">
+
+					<span>我推荐的好友总数（<span style="color:red;">{$recommend_count}</span>）</span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>我的团队成员总数（<span style="color:red;">{$team_count}</span>）</span>&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+			</div>
+			<div class='header'>
+				推荐的好友
+			</div>
+			<div class='main'>
+				<div style="font-weight:bolder;">您推荐的好友，还有<span style="color: red;">{$unrecommend_users["unApply"]|count}</span>个未向5级报单会员发起申请，需要立即处理：</div>
+				<div style="color:#55AAFF;">
+					<notempty name="unrecommend_users['unApply']">
+						<volist name="unrecommend_users['unApply']" id="vo">
+							<span>用户Id:{$vo.userId}（<a style="color:red;"><a href="{:U('Home/Members/recommendNew/?cuid='.$vo['userId'])}">发起申请</a></span>）</span>&nbsp;&nbsp;&nbsp;&nbsp;
+						</volist>
+					</notempty>
+				</div>
+
+				<div style="font-weight:bolder;">您推荐的好友，已有<span style="color: red;">{$unrecommend_users["inApply"]|count}</span>正在等待5级报单会员的审核，请耐心等待：</div>
+				<notempty name="unrecommend_users['inApply']">
+					<volist name="unrecommend_users['inApply']" id="vo">
+						<span>用户Id:{$vo.userId}（<span style="color:red;">耐心等待</span>）</span>&nbsp;&nbsp;&nbsp;&nbsp;
+					</volist>
+				</notempty>
+
+			</div>
+
+			<div class='header'>
+				收到的好友审核申请
+			</div>
+			<div class='main'>
+				<div style="font-weight:bolder;">您收到<span style="color: red;">{$unsovled_apply}</span>个未处理的好友正式申请，需要立即处理：</div>
+				<div style="color:#55AAFF;">
+					<span><a href="{:U('Home/Members/auditIn')}"><span style="color: red;">点击去处理</span></a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+				</div>
+			</div>
+
+			<div class='header'>
+				会员等级
+			</div>
+			<div class='main'>
+				<div style="font-weight:bolder;">我的等级</div>
+				<div style="color:#55AAFF;">
+
+					<span>我当前的等级: <span style="color:red;">{$current_level}</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>我下一个等级: <span style="color:red;">{$next_level}</span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<if condition="$if_can_update eq 1">
+
+						<a href="{:U('Home/Members/promoteNew')}"><span style="color:red;">去升级</span></a>
+					</if>
+				</div>
+
+				<div style="font-weight:bolder;">升级请求</div>
+				<div style="color:#55AAFF;">
+
+					<if condition="$unsolved_promote_count gt 0">
+						<a href="{:U('Home/Members/promoteIn')}"><span style="color:red;">{$unsolved_promote_count}个未处理升级请求，去处理</span></a>
+					<else /> 没有未处理会员升级请求
+					</if>
+
+				</div>
+			</div>
+			
+		</div>
+
+		<div style="width:192px;float:left;min-height:400px;border-left:1px solid #cccccc;">
+			<!--<div style="height:36px;line-height:36px;font-weight:bolder;padding-left:10px;">-->
+				<!--平台联系方式-->
+			<!--</div>-->
+			<!--<div style="padding-left:10px;line-height:26px;">-->
+				<!--<div>电话：{$shopInfo['shop']['userPhone']}</div>-->
+				<!--<div>邮箱：{$shopInfo['shop']['userEmail']}</div>-->
+				<!--<div>服务时间：{$shopInfo['shop']['serviceStartTime']}-{$shopInfo['shop']['serviceEndTime']}</div>-->
+			<!--</div>-->
+		</div>
+		<div class="wst-clear"></div>
+	</div>
+</div>
+</block>   

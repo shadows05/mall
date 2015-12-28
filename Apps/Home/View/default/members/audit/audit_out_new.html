@@ -1,0 +1,46 @@
+<extend name="./Apps/Home/View/default/members/layout.html" />
+<block name="content">
+
+    <h3>提示：推荐人收到被推荐人的500员红包后并且通过被推荐人的申请后，需要向被推荐人的上层5级会员发送100元红包并发起对被推荐人的正式审核，只有被推荐人的上层五级会员审核通过之后，被推荐人才可成为正式会员！！</h3>
+
+    <br />
+    <br />
+
+    <form name="myform" method="post" id="myform"  action="{:U()}">
+
+        <table class="table table-hover table-striped table-bordered wst-form">
+            <input type="hidden" name="cuid" value="{$c_user['userId']}" >
+            <tr>
+                <th width='120' align='right'>5级报单会员：</th>
+                <td><input type='text' readonly="readonly" name="five_level_uid" class="form-control wst-ipt" value='{$five_level_user["loginName"]}' maxLength='20'/></td>
+            </tr>
+            <tr>
+                <th width='120' align='right'>5级报单会员手机：</th>
+                <td><input type='text' readonly="readonly" name="five_level_uid_phone" class="form-control wst-ipt" value='{$five_level_user["userPhone"]}' maxLength='20'/></td>
+            </tr>
+            <tr>
+                <th width='120' align='right'>5级报单会员微信：</th>
+                <td><input type='text' readonly="readonly" name="five_level_uid_chat" class="form-control wst-ipt" value='{$five_level_user["userWebchat"]}' maxLength='20'/></td>
+            </tr>
+            <tr>
+                <th width='120' align='right'>被推荐会员：</th>
+                <td><input type='text' readonly="readonly" name="c_user" class="form-control wst-ipt" value='{$c_user["loginName"]}' maxLength='20'/></td>
+            </tr>
+            <tr>
+                <th width='120' align='right'>被推荐会员手机：</th>
+                <td><input type='text' readonly="readonly" name="c_user_phone" class="form-control wst-ipt" value='{$c_user["userPhone"]}' maxLength='20'/></td>
+            </tr>
+            <tr>
+                <th width='120' align='right'>被推荐会员微信：</th>
+                <td><input type='text' readonly="readonly" name="c_user_chat" class="form-control wst-ipt" value='{$c_user["userWebchat"]}' maxLength='20'/></td>
+            </tr>
+            <tr>
+                <td colspan='3' style='padding-left:250px;'>
+                    <button type="submit" class="btn btn-success">确定向5级报单会员发起申请</button>
+                    <button type="button" class="btn btn-primary" onclick='javascript:location.href="{:U('Members/index')}"'>返&nbsp;回</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</block>

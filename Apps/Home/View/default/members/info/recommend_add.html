@@ -1,0 +1,122 @@
+<extend name="./Apps/Home/View/default/members/layout.html" />
+<block name="content">
+    <form name="myform" method="post" id="myform" autocomplete="off">
+
+        <table class="table table-hover table-striped table-bordered wst-form">
+            <tr>
+                <th width='120' align='right'>账号<font color='red'>*</font>：</th>
+                <td><input type='text' id='loginName' name='loginName' class="form-control wst-ipt" value='{$object.loginName}' maxLength='20'/></td>
+            </tr>
+            <tr>
+                <th width='120' align='right'>密码<font color='red'>*</font>：</th>
+                <td>
+                    <input type='password' id='loginPwd' class="form-control wst-ipt" value='{$object.loginPwd}' maxLength='20'/>
+                    <if condition="$object['userId'] !=0 ">(为空则说明不修改密码)</if></td>
+            </tr>
+            <tr>
+                <th align='right'>真实姓名<font color='red'>*</font>：</th>
+                <td>
+                    <input type='text' id='userName' class="form-control wst-ipt" value='{$object.userName}' maxLength='20'/>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>性别：</th>
+                <td>
+                    <label>
+                        <input type='radio' id='userSex1' name='userSex' value='1'/>男
+                    </label>
+                    <label>
+                        <input type='radio' id='userSex2' name='userSex' value='2'/>女
+                    </label>
+                    <label>
+                        <input type='radio' id='userSex0' name='userSex' value='0'/>保密
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>手机号码<font color='red'>*</font>：</th>
+                <td>
+                    <input type='text' id='userPhone' name='userPhone' class="form-control wst-ipt" value='{$object.userPhone}' maxLength='11'/>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>电子邮箱：</th>
+                <td>
+                    <input type='text' id='userEmail' name='userEmail' class="form-control wst-ipt"  value='{$object.userEmail}' maxLength='25'/>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>身份证号<font color='red'>*</font>：</th>
+                <td colspan='2'>
+                    <input type='text' id='userIdcard' name="userIdcard" class="form-control wst-ipt"  value='{$object.userIdcard}'  maxLength='30'/>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>微信号<font color='red'>*</font>：</th>
+                <td colspan='2'>
+                    <input type='text' id='userWebchat' name="userWebchat" class="form-control wst-ipt"  value='{$object.userWebchat}'  maxLength='30'/>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>QQ：</th>
+                <td colspan='2'>
+                    <input type='text' id='userQQ' class="form-control wst-ipt"  value='{$object.userQQ}' onkeypress="return WST.isNumberKey(event)" onkeyup="javascript:WST.isChinese(this,1)" maxLength='15'/>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>推荐人ID<font color='red'>*</font>：</th>
+                <td colspan='2'>
+                    <input type='text' id='recommendId' name="recommendId" class="form-control wst-ipt"  value='{$user.userId}' disabled="disabled" readonly="readonly" maxLength='15'/>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>接头人ID<font color='red'>*</font>：</th>
+                <td colspan='2'>
+                    <input type='text' id='parentId' name="parentId" class="form-control wst-ipt"  value='{$data.parentId}' disabled="disabled" readonly="readonly" maxLength='15'/>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>业务方向<font color='red'>*</font>：</th>
+                <td colspan='2'>
+                    <select class="select input-large" name="bdiraction" id="bdiraction" disabled="disabled">
+                        <if condition="$data.bdiraction eq 0"> <option value="0" selected="">左区</option> <else /> <option value="0">左区</option> </if>
+                        <if condition="$data.bdiraction eq 1"> <option value="1" selected="">中区</option> <else /> <option value="1">中区</option> </if>
+                        <if condition="$data.bdiraction eq 2"> <option value="2" selected="">右区</option> <else /> <option value="2">右区</option> </if>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th align='right'>会员等级<font color='red'>*</font>：</th>
+                <td colspan='2'>
+                    <select class="select input-large" name="level" id="level" disabled="disabled">
+                        <option value="0" selected="selected">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </td>
+            </tr>
+            <th align='right'>会员状态<font color='red'>*</font>：</th>
+            <td colspan='2'>
+                <label>
+                    <input type='radio' id='userStatus' value='1' name='userStatus' checked/>启用
+                </label>
+            </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='padding-left:250px;'>
+                    <button type="submit" class="btn btn-success">保&nbsp;存</button>
+                    <button type="button" class="btn btn-primary" onclick='javascript:location.href="{:U('Members/recommendAtlas')}"'>返&nbsp;回</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</block>
+
