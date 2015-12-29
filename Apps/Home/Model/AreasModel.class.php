@@ -68,7 +68,8 @@ class AreasModel extends BaseModel {
 	  * 获取城市下的区
 	  */
 	  public function getDistricts($parentId){
-		 return $this->cache('WST_CACHE_CITY_003_'.$parentId,31536000)->where('areaFlag=1 and isShow=1 and parentId='.$parentId)->field('areaId,areaName')->order('parentId, areaSort')->select();
+		 //return $this->cache('WST_CACHE_CITY_003_'.$parentId,31536000)->where('areaFlag=1 and isShow=1 and parentId='.$parentId)->field('areaId,areaName')->order('parentId, areaSort')->select();
+		 return $this->where('areaFlag=1 and isShow=1 and parentId='.$parentId)->field('areaId,areaName')->order('parentId, areaSort')->select();
 	  }
 	    
 	  /**
@@ -76,7 +77,8 @@ class AreasModel extends BaseModel {
 	   */
 	  public function getProvinceList(){
 	  	$rs = array();
-	  	$rslist = $this->cache('WST_CACHE_CITY_001',31536000)->where('isShow=1 AND areaFlag = 1 AND areaType=0')->field('areaId,areaName')->order('parentId, areaSort')->select();
+	  	//$rslist = $this->cache('WST_CACHE_CITY_001',31536000)->where('isShow=1 AND areaFlag = 1 AND areaType=0')->field('areaId,areaName')->order('parentId, areaSort')->select();
+		  $rslist = $this->where('isShow=1 AND areaFlag = 1 AND areaType=0')->field('areaId,areaName')->order('parentId, areaSort')->select();
 	  	foreach ($rslist as $key =>$row){
 	  		$rs[$row["areaId"]] = $row;
 	  	}
@@ -88,7 +90,8 @@ class AreasModel extends BaseModel {
 	   */
 	  public function getCityGroupByKey(){
 	  	$rs = array();
-	  	$rslist = $this->cache('WST_CACHE_CITY_000',31536000)->where('isShow=1 AND areaFlag = 1 AND areaType=1')->field('areaId,areaName,areaKey')->order('areaKey, areaSort')->select();
+//	  	$rslist = $this->cache('WST_CACHE_CITY_000',31536000)->where('isShow=1 AND areaFlag = 1 AND areaType=1')->field('areaId,areaName,areaKey')->order('areaKey, areaSort')->select();
+		  $rslist = $this->where('isShow=1 AND areaFlag = 1 AND areaType=1')->field('areaId,areaName,areaKey')->order('areaKey, areaSort')->select();
 	  	foreach ($rslist as $key =>$row){
 	  		$rs[$row["areaKey"]][] = $row;
 	  	}
@@ -100,7 +103,8 @@ class AreasModel extends BaseModel {
 	   */
 	  public function getCityListByProvince($provinceId = 0){
 	  	$rs = array();
-	  	$rslist = $this->cache('WST_CACHE_CITY_002_'.$provinceId,31536000)->where('isShow=1 AND areaFlag = 1 AND areaType=1 AND parentId='.$provinceId)->field('areaId,areaName')->order('parentId, areaSort')->select();
+//	  	$rslist = $this->cache('WST_CACHE_CITY_002_'.$provinceId,31536000)->where('isShow=1 AND areaFlag = 1 AND areaType=1 AND parentId='.$provinceId)->field('areaId,areaName')->order('parentId, areaSort')->select();
+		  $rslist = $this->where('isShow=1 AND areaFlag = 1 AND areaType=1 AND parentId='.$provinceId)->field('areaId,areaName')->order('parentId, areaSort')->select();
 	  	foreach ($rslist as $key =>$row){
 	  		$rs[] = $row;
 	  	}
