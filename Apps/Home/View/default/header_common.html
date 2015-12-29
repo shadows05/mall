@@ -2,29 +2,29 @@
 <div style="height:132px;">
 <div id="mainsearchbox" style="text-align:center;">
 	<div id="wst-search-pbox">
-		<div style="float:left;width:1240px;" class="wst-header-car">
+		<div style="float:left;width:240px;" class="wst-header-car">
 		  <a href='{:WSTDomain()}'>
-			<img id="wst-logo" width='1210' height='132' src="{:WSTDomain()}/{$CONF['mallLogo']}"/>
+			<img id="wst-logo" width='240' height='132' src="{:WSTDomain()}/{$CONF['mallLogo']}"/>
 		  </a>
 		</div>
-		<!--<div id="wst-search-container">-->
-			<!--<div id="wst-search-type-box">-->
-				<!--<input id="wst-search-type" type="hidden" value="{$searchType}"/>-->
-				<!--<div id="wst-panel-goods" class="<if condition='$searchType eq 1'>wst-panel-curr<else/>wst-panel-notcurr</if>">商品</div>-->
-				<!--<div id="wst-panel-shop" class="<if condition='$searchType eq 2'>wst-panel-curr<else/>wst-panel-notcurr</if>">店铺</div>-->
-				<!--<div class="wst-clear"></div>-->
-			<!--</div>-->
-			<!--<div id="wst-searchbox">-->
-				<!--<input id="keyword" class="wst-search-keyword" data="wst_key_search" onkeyup="getSearchInfo(this,event);" placeholder="<if condition='$searchType eq 2'>搜索 店铺<else/>搜索 商品</if>" autocomplete="off"  value="{$keyWords}">-->
-				<!--<div id="btnsch" class="wst-search-button">搜&nbsp;索</div>-->
-				<!--<div id="wst_key_search_list" style="position:absolute;top:38px;left:-1px;border:1px solid #b8b8b8;min-width:567px;display:none;background-color:#ffffff;z-index:1000;">dfdf</div>-->
-			<!--</div>-->
-			<!--<div id="wst-hotsearch-keys">-->
-				<!--<volist name="CONF['hotSearchs']" key="k" id="vo">-->
-				<!--<a href="{:U('Home/goods/getGoodsList',array('keyWords'=>$vo))}">{$vo}</a><if condition="$k lt count($CONF['hotSearchs'])">&nbsp;&nbsp;|&nbsp;&nbsp;</if>-->
-				<!--</volist>-->
-			<!--</div>-->
-		<!--</div>-->
+		<div id="wst-search-container">
+			<div id="wst-search-type-box">
+				<input id="wst-search-type" type="hidden" value="{$searchType}"/>
+				<div id="wst-panel-goods" class="<if condition='$searchType eq 1'>wst-panel-curr<else/>wst-panel-notcurr</if>">商品</div>
+				<div id="wst-panel-shop" class="<if condition='$searchType eq 2'>wst-panel-curr<else/>wst-panel-notcurr</if>">店铺</div>
+				<div class="wst-clear"></div>
+			</div>
+			<div id="wst-searchbox">
+				<input id="keyword" class="wst-search-keyword" data="wst_key_search" onkeyup="getSearchInfo(this,event);" placeholder="<if condition='$searchType eq 2'>搜索 店铺<else/>搜索 商品</if>" autocomplete="off"  value="{$keyWords}">
+				<div id="btnsch" class="wst-search-button">搜&nbsp;索</div>
+				<div id="wst_key_search_list" style="position:absolute;top:38px;left:-1px;border:1px solid #b8b8b8;min-width:567px;display:none;background-color:#ffffff;z-index:1000;">dfdf</div>
+			</div>
+			<div id="wst-hotsearch-keys">
+				<volist name="CONF['hotSearchs']" key="k" id="vo">
+				<a href="{:U('Home/goods/getGoodsList',array('keyWords'=>$vo))}">{$vo}</a><if condition="$k lt count($CONF['hotSearchs'])">&nbsp;&nbsp;|&nbsp;&nbsp;</if>
+				</volist>
+			</div>
+		</div>
 		<!--<div id="wst-search-des-container">-->
 			<!--<div class="des-box">-->
 				<!--<div class='wst-reach'>-->

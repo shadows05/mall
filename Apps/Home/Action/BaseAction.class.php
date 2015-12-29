@@ -34,7 +34,7 @@ class BaseAction extends Controller {
 	public function ifUserMember(){
 		$USER = session('WST_USER');
 		$userId = $USER["userID"];
-		$usersMmeber = M("users_mmeber")->find($userId);
+		$usersMmeber = M("users_member")->find($userId);
 		if(!empty($usersMmeber)){
 			return 1;
 		}else{
