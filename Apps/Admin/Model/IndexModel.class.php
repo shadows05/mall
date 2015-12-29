@@ -63,6 +63,27 @@ class IndexModel extends BaseModel {
 	}
 
 	/**
+	 * 当天动态
+	 */
+	public function getDayInfo(){
+		$ret = array();
+		//用户
+		$weekDate = date('Y-m-d 00:00:00',time());//一日内
+		$ret['userNew'] = M('Users')->where('userFlag=1 and createTime>"'.$weekDate.'"')->count();//新增用户
+
+		//申请店铺
+		$ret['shopApply'] = M('Shops')->where('shopStatus >= 0 and shopFlag=1 and createTime>"'.$weekDate.'"')->count();
+
+		//新增商品
+		$ret['goodsNew'] = M('goods')->where('goodsFlag=1 and createTime>"'.$weekDate.'"')->count();
+		//新增订单
+		$ret['ordersNew'] = M('orders')->where('orderFlag=1 and orderStatus >=0 and createTime>"'.$weekDate.'"')->count();
+		//新增店铺
+		$map['shopStatus'] = 1;
+		$ret['shopNew'] = M('Shops')->where('shopStatus = 1 and shopFlag=1 and createTime>"'.$weekDate.'"')->count();
+		return $ret;
+	}
+	/**
 	 * 一周动态
 	 * @return [type] [description]
 	 */

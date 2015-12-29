@@ -32,6 +32,23 @@
          <!--<div class='col-xs-12 wstmall-accredit-tips'>系统检测到您未获取授权，点此<a target='_blank' href='http://www.wstmall.com/index.php?m=Home&c=License&a=getLicense'>获取系统授权码</a></div>          -->
          <div class='row' style='padding-left:10px;margin-right:10px;'>
 	         <div class="col-md-12">
+				 <div class="box-header">
+					 <h4 class="text-blue">当天信息</h4>
+					 <table class="table table-hover table-striped table-bordered wst-form">
+						 <tr>
+							 <td width="20%" align='right'>新增会员数：</td>
+							 <td width="30%">{$dayInfo.userNew}</td>
+							 <td width="20%" align='right'>新增店铺数/申请数：</td>
+							 <td width="30%">{$dayInfo.shopNew}/{$dayInfo.shopApply}</td>
+						 </tr>
+						 <tr>
+							 <td align='right'>新增商品数：</td>
+							 <td>{$weekInfo.goodsNew}</td>
+							 <td align='right'>新增订单数：</td>
+							 <td>{$weekInfo.ordersNew}</td>
+						 </tr>
+					 </table>
+				 </div>
 	           <div class="box-header">
 	             <h4 class="text-blue">一周动态</h4>
 	             <table class="table table-hover table-striped table-bordered wst-form">
