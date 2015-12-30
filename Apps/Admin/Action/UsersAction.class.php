@@ -145,6 +145,13 @@ class UsersAction extends BaseAction{
 		$rs = $m->editUserStatus();
 		$this->ajaxReturn($rs);
 	}
+	public function toEditAccountLevel(){
+		$this->isLogin();
+		$user_member = M("users_member")->find(I("id"));
+		$this->assign("userId", I("id"));
+		$this->assign("level", $user_member["level"]);
+		$this->display("/users/edit_account_level");
+	}
 	/**
 	 * 跳到账号编辑状态
 	 */
@@ -155,6 +162,13 @@ class UsersAction extends BaseAction{
 		$object = $m->getAccountById();
 		$this->assign('object',$object);
 		$this->display("/users/edit_account");
+	}
+
+	public function editAccountLevel(){
+		$this->isAjaxLogin();
+		$m = D('Admin/Users');
+		$rs = $m->editAccountLevel();
+		$this->ajaxReturn($rs);
 	}
 	/**
 	 * 编辑账号信息

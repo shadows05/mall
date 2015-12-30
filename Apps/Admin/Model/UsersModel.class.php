@@ -155,18 +155,27 @@ class UsersModel extends BaseModel {
 	 	if(I('userType',-1)!=-1)$sql.=" and userType=".I('userType',-1);
 	 	$sql.="  order by userId desc";
 		$rs = $m->pageQuery($sql);
+		 foreach($rs['root'] as $k=>$v){
+			$userId = $v["userId"];
+			$user_member =  M("users_member")->find($userId);
+			$parentId = $user_member["parentId"];
+			$recommendId = $user_member["recommendId"];
+			$rs['root'][$k]["users_member"] = $user_member;
+			$rs['root'][$k]["parent_member"] = M("users")->find($parentId);
+			$rs['root'][$k]["recommend_member"] = M("users")->find($recommendId);
+		 }
 		//计算等级
-		if(count($rs)>0){
-			$m = M('user_ranks');
-			$urs = $m->select();
-			foreach ($rs['root'] as $key=>$v){
-				foreach ($urs as $rkey=>$rv){
-					if($v['userTotalScore']>=$rv['startScore'] && $v['userTotalScore']<$rv['endScore']){
-					   $rs['root'][$key]['userRank'] = $rv['rankName'];
-					}
-				}
-			}
-		}
+//		if(count($rs)>0){
+//			$m = M('user_ranks');
+//			$urs = $m->select();
+//			foreach ($rs['root'] as $key=>$v){
+//				foreach ($urs as $rkey=>$rv){
+//					if($v['userTotalScore']>=$rv['startScore'] && $v['userTotalScore']<$rv['endScore']){
+//					   $rs['root'][$key]['userRank'] = $rv['rankName'];
+//					}
+//				}
+//			}
+//		}
 		return $rs;
 	 }
 	 /**
@@ -290,5 +299,16 @@ class UsersModel extends BaseModel {
 		}
 		return $rd;
 	 }
+
+	public function editAccountLevel(){
+		$rd = array('status'=>-1);
+		if(I('id')=='')return $rd;
+		$level = I("level");
+		$rs = M("users_member")->save(array("userId"=>I("id"),"level"=>$level));
+		if(false !== $rs){
+			$rd['status']= 1;
+		}
+		return $rd;
+	}
 };
 ?>
