@@ -28,14 +28,27 @@ class BaseAction extends Controller {
    		$this->assign('template_path',$template_path);
    		$this->assign('CONF',$GLOBALS['CONFIG']);
 		$this->assign('ifUserMember', $this->ifUserMember());
+		$this->assign('user_level', $this->getUserLevel());
 		$this->footer(); //加入底部
+	}
+
+	public function getUserLevel(){
+		$USER = session('WST_USER');
+		$userId = $USER["userId"];
+		$userMember = M("users_member")->find($userId);
+		if(empty($userMember)){
+			$level = 0;
+		}else{
+			$level = $userMember["level"];
+		}
+		return $level;
 	}
 
 	public function ifUserMember(){
 		$USER = session('WST_USER');
-		$userId = $USER["userID"];
-		$usersMmeber = M("users_member")->find($userId);
-		if(!empty($usersMmeber)){
+		$userId = $USER["userId"];
+		$userMember = M("users_member")->find($userId);
+		if(!empty($userMember)){
 			return 1;
 		}else{
 			return 0;

@@ -219,17 +219,17 @@ class ShopsModel extends BaseModel {
 			$rd['msg'] = '店铺申请已存在，请勿重复申请!';
 			return $rd;
 		}
-	 	$verify = session('VerifyCode_userPhone');
-		$startTime = (int)session('VerifyCode_userPhone_Time');
-		$mobileCode = I("mobileCode");
-		if((time()-$startTime)>120){
-			 $rd['msg'] = '验证码已失效!';
-			 return $rd;
-		}
-		if($mobileCode=="" || $verify != $mobileCode){
-			$rd['msg'] = '验证码错误!';
-			return $rd;
-		}
+//	 	$verify = session('VerifyCode_userPhone');
+//		$startTime = (int)session('VerifyCode_userPhone_Time');
+//		$mobileCode = I("mobileCode");
+//		if((time()-$startTime)>120){
+//			 $rd['msg'] = '验证码已失效!';
+//			 return $rd;
+//		}
+//		if($mobileCode=="" || $verify != $mobileCode){
+//			$rd['msg'] = '验证码错误!';
+//			return $rd;
+//		}
 	 	$userRules = array(
 		     array('userName','require','店主姓名不能为空！',1,'',1),
 		     array('userPhone','require','手机号不能为空！',1),

@@ -406,10 +406,10 @@ function userOpenShop(){
 		WST.msg('必须同意使用协议才允许注册!',{icon: 5});
 		return;
 	}
-	if(params.mobileCode==''){
-		WST.msg('请输入验证码!',{icon: 5});
-		return;
-	}
+	//if(params.mobileCode==''){
+	//	WST.msg('请输入验证码!',{icon: 5});
+	//	return;
+	//}
 	var ll = layer.load('正在处理，请稍后...', 3);
 	$.post(Think.U('Home/Shops/openShopByUser'),params,function(data,textStatus){
 		var json = WST.toJson(data);
