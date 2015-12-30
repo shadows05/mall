@@ -85,7 +85,7 @@
                <td>{$vo['users_member']['level']}&nbsp;</td>
                <td>{$vo['parent_member']['loginName']}</td>
                <td>{$vo['recommend_member']['loginName']}&nbsp;</td>
-               <td></td>
+               <td><a href="{:U('Admin/Index/map',array('userId'=>$vo['userId']))}">查看</a></td>
                <td>
                <if condition="$vo['userStatus']==0 ">
                  <span class='label label-danger wst-label'>

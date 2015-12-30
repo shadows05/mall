@@ -147,4 +147,11 @@ class IndexAction extends BaseAction {
 		$rv['status'] = WSTDelDir(C('WST_RUNTIME_PATH'));
     	$this->ajaxReturn($rv);
     }
+
+	public function map(){
+		$userId = I("userId");
+		$structure = D("Admin/UsersMember")->generateTeamStructure($userId);
+		$this->assign("structure", $structure);
+		$this->display("users/map");
+	}
 }
