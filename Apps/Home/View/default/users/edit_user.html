@@ -50,6 +50,46 @@ $(function () {
 				onError : "该邮箱已存在。",
 				onWait : "请稍候..."
 			}).defaultPassed().unFormValidator(true);
+	$("#userIdcard").formValidator({
+		onShow:"",onFocus:"请输入正确的身份证号"
+	}).inputValidator({min:17,max:18,onError:"你输入的身份证号码非法,请确认"}).regexValidator({
+		regExp:"idcard",dataType:"enum",onError:"身份证号码格式错误"
+	}).ajaxValidator({
+		dataType : "json",
+		async : true,
+		url : "{:U('Home/Users/checkLoginKey')}",
+		success : function(data){
+			var json = WST.toJson(data);
+			if( json.status == "1" ) {
+				return true;
+			} else {
+				return false;
+			}
+			return "该身份证号码已被使用";
+		},
+		buttons: $("#dosubmit"),
+		onError : "该身份证号码已存在。",
+		onWait : "请稍候..."
+	}).defaultPassed();
+	$("#userWebchat").formValidator({
+		onShow:"",onFocus:"请输入正确的微信号"
+	}).inputValidator({min:1,onError:"请输入微信号"}).ajaxValidator({
+		dataType : "json",
+		async : true,
+		url : "{:U('Home/Users/checkLoginKey')}",
+		success : function(data){
+			var json = WST.toJson(data);
+			if( json.status == "1" ) {
+				return true;
+			} else {
+				return false;
+			}
+			return "该微信号码已被使用";
+		},
+		buttons: $("#dosubmit"),
+		onError : "该微信号码已存在。",
+		onWait : "请稍候..."
+	}).defaultPassed();
 		$("#userPhone").blur(function(){
 			  if($("#userPhone").val()==''){
 				  $("#userPhone").unFormValidator(true);
@@ -98,7 +138,7 @@ var filetypes = ["gif","jpg","png","jpeg"];
        <form name="myform" method="post" id="myform" autocomplete="off">
         <table class="table table-hover table-striped table-bordered wst-form" style='margin-top:10px;'>
            <tr>
-             <th align='right' width="80">昵称 <font color='red'>*</font>：</th>
+             <th align='right' width="80">真实姓名 <font color='red'>*</font>：</th>
              <td>
              <input type='text' id='userName' name='userName' value="{$user['userName']}"/>
              </td>
@@ -129,6 +169,18 @@ var filetypes = ["gif","jpg","png","jpeg"];
              <input type='text' id='userEmail' name='userEmail' value="{$user['userEmail']}" maxlength="25" style='width:250px'/>
              </td>
            </tr>
+			<tr>
+				<th align='right'>身份证号<font color='red'>*</font>：</th>
+				<td>
+					<input type='text' id='userIdcard' name='userIdcard' value="{$user['userIdcard']}" maxlength="25" style='width:250px'/>
+				</td>
+			</tr>
+			<tr>
+				<th align='right'>微信号<font color='red'>*</font>：</th>
+				<td>
+					<input type='text' id='userWebchat' name='userWebchat' value="{$user['userWebchat']}" maxlength="25" style='width:250px'/>
+				</td>
+			</tr>
            <tr>
              <td colspan='2' style='padding-left:250px;height:100px;'>
                  <button class='wst-btn-query' type="submit">保&nbsp;存</button>

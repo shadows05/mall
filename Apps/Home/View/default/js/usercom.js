@@ -183,7 +183,9 @@ function editUser(){
 	   params.userPhone = $.trim($('#userPhone').val());
 	   params.userEmail = $.trim($('#userEmail').val());
 	   params.userSex = $('input:radio[name="userSex"]:checked').val();
-	   params.userPhoto =  $.trim($('#userPhoto').val());		
+	   params.userPhoto =  $.trim($('#userPhoto').val());
+	   params.userIdcard =  $.trim($('#userIdcard').val());
+	   params.userWebchat =  $.trim($('#userWebchat').val());
 	   var ll = layer.load('数据处理中，请稍候...');
 	   $.post(Think.U('Home/Users/editUser'),params,function(data,textStatus){
 		   layer.close(ll);

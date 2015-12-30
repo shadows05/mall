@@ -54,12 +54,12 @@ class UsersModel extends BaseModel {
 	 	$loginName = ($loginName!='')?$loginName:I('loginName');
 	 	$rd = array('status'=>-1);
 	 	if($loginName=='')return $rd;
-	 	$sql = " (loginName ='%s' or userPhone ='%s' or userEmail='%s') and userFlag=1 ";
+	 	$sql = " (loginName ='%s' or userPhone ='%s' or userEmail='%s' or userIdcard='%s' or userWebchat='%s') and userFlag=1 ";
 	 	$m = M('users');
 	    if($id>0){
 	 		$sql.=" and userId!=".$id;
 	 	}
-	 	$rs = $m->where($sql,array($loginName,$loginName,$loginName))->count();
+	 	$rs = $m->where($sql,array($loginName,$loginName,$loginName,$loginName,$loginName))->count();
 	    if($rs==0)$rd['status'] = 1;
 	    return $rd;
 	 }
@@ -277,6 +277,8 @@ class UsersModel extends BaseModel {
 		$rd = array('status'=>-1);
 		$userPhone = I("userPhone");
 		$userEmail = I("userEmail");
+		$userIdcard = I("userIdcard");
+		$userWebchat = I("userWebchat");
 		$userId = (int)$obj["userId"];
 	    //检测账号是否存在
         $crs = $this->checkLoginKey($userPhone,$userId);
@@ -290,6 +292,18 @@ class UsersModel extends BaseModel {
 	    	$rd['status'] = -3;
 	    	return $rd;
 	    }
+		//检测身份证是否存在
+		$crs = $this->checkLoginKey($userIdcard,$userId);
+		if($crs['status']!=1){
+			$rd['status'] = -3;
+			return $rd;
+		}
+		//检测微信是否存在
+		$crs = $this->checkLoginKey($userWebchat,$userId);
+		if($crs['status']!=1){
+			$rd['status'] = -3;
+			return $rd;
+		}
 		$m = M('users');
 		$data = array();
 		
@@ -299,6 +313,8 @@ class UsersModel extends BaseModel {
 		$data["userSex"] = (int)I("userSex",0);
 		$data["userEmail"] = $userEmail;
 		$data["userPhoto"] = I("userPhoto");
+		$data["userIdcard"] = $userIdcard;
+		$data["userWebchat"] = $userWebchat;
 		$rs = $m->where(" userId=".$userId)->data($data)->save();
 	    if(false !== $rs){
 			$rd['status']= 1;
@@ -309,6 +325,8 @@ class UsersModel extends BaseModel {
 			$WST_USER['userPhone'] = $data["userPhone"];
 			$WST_USER['userEmail'] = $data["userEmail"];
 			$WST_USER['userPhoto'] = $data["userPhoto"];
+			$WST_USER['userWebchat'] = $data["userWebchat"];
+			$WST_USER['userIdcard'] = $data["userIdcard"];
 			session('WST_USER',$WST_USER);
 		}
 		return $rd;
