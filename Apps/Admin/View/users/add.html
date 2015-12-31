@@ -82,27 +82,27 @@
 			onError : "该手机号码已存在。",
 			onWait : "请稍候..."
 		}).defaultPassed();
-	   $("#userIdcard").formValidator({
-		   onShow:"",onFocus:"请输入正确的身份证号"
-	   }).inputValidator({min:17,max:18,onError:"你输入的身份证号码非法,请确认"}).regexValidator({
-		   regExp:"idcard",dataType:"enum",onError:"身份证号码格式错误"
-	   }).ajaxValidator({
-		   dataType : "json",
-		   async : true,
-		   url : "{:U('Admin/Users/checkLoginKey')}",
-		   success : function(data){
-			   var json = WST.toJson(data);
-			   if( json.status == "1" ) {
-				   return true;
-			   } else {
-				   return false;
-			   }
-			   return "该身份证号码已被使用";
-		   },
-		   buttons: $("#dosubmit"),
-		   onError : "该身份证号码已存在。",
-		   onWait : "请稍候..."
-	   }).defaultPassed();
+//	   $("#userIdcard").formValidator({
+//		   onShow:"",onFocus:"请输入正确的身份证号"
+//	   }).inputValidator({min:17,max:18,onError:"你输入的身份证号码非法,请确认"}).regexValidator({
+//		   regExp:"idcard",dataType:"enum",onError:"身份证号码格式错误"
+//	   }).ajaxValidator({
+//		   dataType : "json",
+//		   async : true,
+//		   url : "{:U('Admin/Users/checkLoginKey')}",
+//		   success : function(data){
+//			   var json = WST.toJson(data);
+//			   if( json.status == "1" ) {
+//				   return true;
+//			   } else {
+//				   return false;
+//			   }
+//			   return "该身份证号码已被使用";
+//		   },
+//		   buttons: $("#dosubmit"),
+//		   onError : "该身份证号码已存在。",
+//		   onWait : "请稍候..."
+//	   }).defaultPassed();
 	   $("#userWebchat").formValidator({
 		   onShow:"",onFocus:"请输入正确的微信号"
 	   }).inputValidator({min:1,onError:"请输入微信号"}).ajaxValidator({

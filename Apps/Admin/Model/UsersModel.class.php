@@ -34,13 +34,13 @@ class UsersModel extends BaseModel {
 		 		return $rd;
 		 	}
 	 	}
-		 if(I("userIdcard")!=''){
-			 $hasUserEmail = self::checkLoginKey(I("userIdcard"));
-			 if($hasUserEmail['status']<=0){
-				 $rd = array('status'=>-2);
-				 return $rd;
-			 }
-		 }
+//		 if(I("userIdcard")!=''){
+//			 $hasUserEmail = self::checkLoginKey(I("userIdcard"));
+//			 if($hasUserEmail['status']<=0){
+//				 $rd = array('status'=>-2);
+//				 return $rd;
+//			 }
+//		 }
 		 if(I("userWebchat")!=''){
 			 $hasUserEmail = self::checkLoginKey(I("userWebchat"));
 			 if($hasUserEmail['status']<=0){
