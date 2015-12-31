@@ -20,20 +20,20 @@ class UsersModel extends BaseModel {
 	 		$rd = array('status'=>-2);
 	 		return $rd;
 	 	}
-	 	if(I("userPhone")!=''){
-	 		$hasUserPhone = self::checkLoginKey(I("userPhone"));
-		 	if($hasUserPhone['status']<=0){
-		 		$rd = array('status'=>-2);
-		 		return $rd;
-		 	}
-	 	}
-	 	if(I("userEmail")!=''){
-		 	$hasUserEmail = self::checkLoginKey(I("userEmail"));
-		 	if($hasUserEmail['status']<=0){
-		 		$rd = array('status'=>-2);
-		 		return $rd;
-		 	}
-	 	}
+//	 	if(I("userPhone")!=''){
+//	 		$hasUserPhone = self::checkLoginKey(I("userPhone"));
+//		 	if($hasUserPhone['status']<=0){
+//		 		$rd = array('status'=>-2);
+//		 		return $rd;
+//		 	}
+//	 	}
+//	 	if(I("userEmail")!=''){
+//		 	$hasUserEmail = self::checkLoginKey(I("userEmail"));
+//		 	if($hasUserEmail['status']<=0){
+//		 		$rd = array('status'=>-2);
+//		 		return $rd;
+//		 	}
+//	 	}
 //		 if(I("userIdcard")!=''){
 //			 $hasUserEmail = self::checkLoginKey(I("userIdcard"));
 //			 if($hasUserEmail['status']<=0){
@@ -41,13 +41,13 @@ class UsersModel extends BaseModel {
 //				 return $rd;
 //			 }
 //		 }
-		 if(I("userWebchat")!=''){
-			 $hasUserEmail = self::checkLoginKey(I("userWebchat"));
-			 if($hasUserEmail['status']<=0){
-				 $rd = array('status'=>-2);
-				 return $rd;
-			 }
-		 }
+//		 if(I("userWebchat")!=''){
+//			 $hasUserEmail = self::checkLoginKey(I("userWebchat"));
+//			 if($hasUserEmail['status']<=0){
+//				 $rd = array('status'=>-2);
+//				 return $rd;
+//			 }
+//		 }
 	 	//创建数据
 	 	$id = I("id",0);
 		$data = array();

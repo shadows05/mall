@@ -122,72 +122,67 @@
 					}).inputValidator({
 					min:1,max:50,onError:"请输入正确的用户名"
 					});
-//					$("#loginPwd").formValidator({
-//					onShow:"",onFocus:"登录密码长度应该为5-20位之间"
-//					}).inputValidator({
-//					min:5,max:50,onError:"登录密码长度应该为5-20位之间!!!"
-//					});
-					$("#userPhone").formValidator({
-					onShow:"",onFocus:"请输入正确的手机号"
-					}).inputValidator({min:11,max:11,onError:"你输入的手机号码非法,请确认"}).regexValidator({
-					regExp:"mobile",dataType:"enum",onError:"手机号码格式错误"
-					}).ajaxValidator({
-					dataType : "json",
-					async : true,
-					url : "{:U('Admin/Users/checkLoginKey')}",
-					success : function(data){
-					var json = WST.toJson(data);
-					if( json.status == "1" ) {
-					return true;
-					} else {
-					return false;
-					}
-					return "该手机号码已被使用";
-					},
-					buttons: $("#dosubmit"),
-					onError : "该手机号码已存在。",
-					onWait : "请稍候..."
-					}).defaultPassed();
-					$("#userIdcard").formValidator({
-					onShow:"",onFocus:"请输入正确的身份证号"
-					}).inputValidator({min:17,max:18,onError:"你输入的身份证号码非法,请确认"}).regexValidator({
-					regExp:"idcard",dataType:"enum",onError:"身份证号码格式错误"
-					}).ajaxValidator({
-					dataType : "json",
-					async : true,
-					url : "{:U('Admin/Users/checkLoginKey')}",
-					success : function(data){
-					var json = WST.toJson(data);
-					if( json.status == "1" ) {
-					return true;
-					} else {
-					return false;
-					}
-					return "该身份证号码已被使用";
-					},
-					buttons: $("#dosubmit"),
-					onError : "该身份证号码已存在。",
-					onWait : "请稍候..."
-					}).defaultPassed();
-					$("#userWebchat").formValidator({
-					onShow:"",onFocus:"请输入正确的微信号"
-					}).inputValidator({min:1,onError:"请输入微信号"}).ajaxValidator({
-					dataType : "json",
-					async : true,
-					url : "{:U('Admin/Users/checkLoginKey')}",
-					success : function(data){
-					var json = WST.toJson(data);
-					if( json.status == "1" ) {
-					return true;
-					} else {
-					return false;
-					}
-					return "该微信号码已被使用";
-					},
-					buttons: $("#dosubmit"),
-					onError : "该微信号码已存在。",
-					onWait : "请稍候..."
-					}).defaultPassed();
+//					$("#userPhone").formValidator({
+//					onShow:"",onFocus:"请输入正确的手机号"
+//					}).inputValidator({min:11,max:11,onError:"你输入的手机号码非法,请确认"}).regexValidator({
+//					regExp:"mobile",dataType:"enum",onError:"手机号码格式错误"
+//					}).ajaxValidator({
+//					dataType : "json",
+//					async : true,
+//					url : "{:U('Admin/Users/checkLoginKey')}",
+//					success : function(data){
+//					var json = WST.toJson(data);
+//					if( json.status == "1" ) {
+//					return true;
+//					} else {
+//					return false;
+//					}
+//					return "该手机号码已被使用";
+//					},
+//					buttons: $("#dosubmit"),
+//					onError : "该手机号码已存在。",
+//					onWait : "请稍候..."
+//					}).defaultPassed();
+//					$("#userIdcard").formValidator({
+//					onShow:"",onFocus:"请输入正确的身份证号"
+//					}).inputValidator({min:17,max:18,onError:"你输入的身份证号码非法,请确认"}).regexValidator({
+//					regExp:"idcard",dataType:"enum",onError:"身份证号码格式错误"
+//					}).ajaxValidator({
+//					dataType : "json",
+//					async : true,
+//					url : "{:U('Admin/Users/checkLoginKey')}",
+//					success : function(data){
+//					var json = WST.toJson(data);
+//					if( json.status == "1" ) {
+//					return true;
+//					} else {
+//					return false;
+//					}
+//					return "该身份证号码已被使用";
+//					},
+//					buttons: $("#dosubmit"),
+//					onError : "该身份证号码已存在。",
+//					onWait : "请稍候..."
+//					}).defaultPassed();
+//					$("#userWebchat").formValidator({
+//					onShow:"",onFocus:"请输入正确的微信号"
+//					}).inputValidator({min:1,onError:"请输入微信号"}).ajaxValidator({
+//					dataType : "json",
+//					async : true,
+//					url : "{:U('Admin/Users/checkLoginKey')}",
+//					success : function(data){
+//					var json = WST.toJson(data);
+//					if( json.status == "1" ) {
+//					return true;
+//					} else {
+//					return false;
+//					}
+//					return "该微信号码已被使用";
+//					},
+//					buttons: $("#dosubmit"),
+//					onError : "该微信号码已存在。",
+//					onWait : "请稍候..."
+//					}).defaultPassed();
 					$("#userEmail").inputValidator({min:0,max:25,onError:"你输入的邮箱长度非法,请确认"}).regexValidator({
 					regExp:"email",dataType:"enum",onError:"邮箱格式错误"
 					}).ajaxValidator({
