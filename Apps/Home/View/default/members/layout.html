@@ -47,7 +47,7 @@
 			</div>
 			<div class="wst-shop-nav">
 				<div class="wst-nav-box">
-					<li class="liselect"><a href="{:U('Home/Members/index')}" style='color:#FFFFFF;'>交友中心</a></li>
+					<li class="liselect" style="float:left;"><a href="{:U('Home/Members/index')}" style='color:#FFFFFF;'>交友中心</a></li>
 					<div class="wst-clear"></div>
 				</div>
 			</div>
@@ -58,17 +58,17 @@
             <div class='wst-menu'>
 
             	<span class='wst-menu-title' style='border-top:0px;'><span></span>团队信息</span>
-          		<a href="{:U('Home/Members/recommendList/')}"><li <if condition='$umark eq "recommendList"'> class='liselect'</if>>我的推荐</li></a>
-              	<a href="{:U('Home/Members/teamList/')}"><li <if condition='$umark eq "teamList"'> class='liselect'</if>>我的团队</li></a>
-               	<a href="{:U('Home/Members/recommendAtlas/')}"><li <if condition='$umark eq "recommendAtlas" or $umark eq "recommendAdd"'> class='liselect'</if>>推荐图谱</li></a>
+          		<a style="display:block;" href="{:U('Home/Members/recommendList/')}"><li <if condition='$umark eq "recommendList"'> class='liselect'</if>>我的推荐</li></a>
+              	<a style="display:block;" href="{:U('Home/Members/teamList/')}"><li <if condition='$umark eq "teamList"'> class='liselect'</if>>我的团队</li></a>
+               	<a style="display:block;" href="{:U('Home/Members/recommendAtlas/')}"><li <if condition='$umark eq "recommendAtlas" or $umark eq "recommendAdd"'> class='liselect'</if>>推荐图谱</li></a>
 
-              	<span class='wst-menu-title'><span></span>会员审核</span>
-            	<a href="{:U('Home/Members/auditOut/')}"><li <if condition='$umark eq "auditOut"'> class='liselect'</if>>我发出的审核</li></a>
-              	<a href="{:U('Home/Members/auditIn/')}"><li <if condition='$umark eq "auditIn"'> class='liselect'</if>>我收到的审核</li></a>
+              	<span class='wst-menu-title' style='border-top:0px;'><span></span>会员审核</span>
+            	<a style="display:block;" href="{:U('Home/Members/auditOut/')}"><li <if condition='$umark eq "auditOut"'> class='liselect'</if>>我发出的审核</li></a>
+              	<a style="display:block;" href="{:U('Home/Members/auditIn/')}"><li <if condition='$umark eq "auditIn"'> class='liselect'</if>>我收到的审核</li></a>
 
-                <span class='wst-menu-title'><span></span>会员升级</span>
-				<a href="{:U('Home/Members/promoteOut/')}"><li <if condition='$umark eq "promoteOut"'> class='liselect'</if>>我发出的升级</li></a>
-				<a href="{:U('Home/Members/promoteIn/')}"><li <if condition='$umark eq "promoteIn"'> class='liselect'</if>>我收到的升级</li></a>
+                <span class='wst-menu-title' style='border-top:0px;'><span></span>会员升级</span>
+				<a style="display:block;" href="{:U('Home/Members/promoteOut/')}"><li <if condition='$umark eq "promoteOut"'> class='liselect'</if>>我发出的升级</li></a>
+				<a style="display:block;" href="{:U('Home/Members/promoteIn/')}"><li <if condition='$umark eq "promoteIn"'> class='liselect'</if>>我收到的升级</li></a>
                 
             </div>
             <div class='wst-content'>
