@@ -108,7 +108,7 @@ class UsersAction extends BaseAction{
 	 * 查询用户账号
 	 */
 	public function checkLoginKey(){
-		$this->isAjaxLogin();
+		//$this->isAjaxLogin();
 		$m = D('Admin/Users');
 		$key = I('clientid');
 	 	$id = I('id',0);
