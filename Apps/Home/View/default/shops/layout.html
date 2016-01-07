@@ -55,7 +55,7 @@
             	<span class='wst-menu-title'><span></span>交易管理</span>
             
               	<a style="display:block;" href='{:U("Home/Orders/toShopOrdersList")}'><li id='li_toShopOrdersList' <if condition='$umark eq "toShopOrdersList"'> class='liselect'</if>>订单管理<span style="display:none;" class="wst-msg-tips-box"></span></li></a>
-            	<span class='wst-menu-title' style='border-top:0px;float:left;'><span></span>商品管理</span>
+            	<span class='wst-menu-title' style='border-top:0px;'><span></span>商品管理</span>
             
                	<a style="display:block;" href="{:U('Home/ShopsCats/index/')}"><li <if condition='$umark eq "index"'> class='liselect'</if>>商品分类</li></a>
               	<a style="display:block;" href="{:U('Home/Goods/queryOnSaleByPage/')}"><li <if condition='$umark eq "queryOnSaleByPage"'> class='liselect'</if>>出售中的商品</li></a>
@@ -67,7 +67,7 @@
                	<a style="display:block;" href="{:U('Home/AttributeCats/index')}"><li <if condition='$umark eq "AttributeCats"'> class='liselect'</if>>商品类型</li></a>
                	<a style="display:block;" href="{:U('Home/Imports/index')}"><li <if condition='$umark eq "Imports"'> class='liselect'</if>>数据导入</li></a>
 			
-              	<span class='wst-menu-title' style='border-top:0px;float:left;'><span></span>网店设置</span>
+              	<span class='wst-menu-title'><span></span>网店设置</span>
             	<a style="display:block;" href="{:U('Home/Shops/toEdit/')}"><li <if condition='$umark eq "toEdit"'> class='liselect'</if>>店铺资料</li></a>
               	<a style="display:block;" href="{:U('Home/Shops/toShopCfg/')}"><li <if condition='$umark eq "setShop"'> class='liselect'</if>>店铺设置</li></a>
               	<a style="display:block;" href="{:U('Home/Messages/queryByPage/')}"><li id='li_queryMessageByPage' <if condition='$umark eq "queryMessageByPage"'> class='liselect'</if>>商城消息<span style="display:none;" class="wst-msg-tips-box"></span></li></a>
