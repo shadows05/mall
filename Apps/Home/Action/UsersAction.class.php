@@ -158,8 +158,7 @@ class UsersAction extends BaseAction {
 	public function toEditPass(){
 		$this->isLogin();
 		$this->assign("umark","toEditPass");
-		$this->display("default/users/
-		");
+		$this->display("default/users/edit_pass");
 	}
 	
 	/**
