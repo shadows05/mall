@@ -299,7 +299,7 @@ class MembersAction extends BaseAction{
                 break;
             case 4:
                 $user_info["user_title"] = "上五层5级会员";
-                $user_info["update_tips"] = "需要向上五层5级会员发1200元红包";
+                $user_info["update_tips"] = "需要向上五层5级会员发600元红包";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,5);
                 break;
             case 5:
