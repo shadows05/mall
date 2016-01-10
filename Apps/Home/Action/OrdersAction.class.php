@@ -200,7 +200,8 @@ class OrdersAction extends BaseAction {
 				$totalMoney += $goods["cnt"]*$goods["shopPrice"];
 				$gtotalMoney += $goods["cnt"]*$goods["shopPrice"];
 				$ommunitysId = $maddress->getShopCommunitysId($goods["shopId"]);
-				$shopColleges[$goods["shopId"]] = $ommunitysId;			
+				$shopColleges[$goods["shopId"]]["communitysId"] = $ommunitysId;
+				$shopColleges[$goods["shopId"]]["isSelf"] = M("shops")->where("shopId=".$goods["shopId"])->getField("isSelf");
 				if($startTime<$goods["startTime"]){
 					$startTime = $goods["startTime"];
 				}
@@ -252,7 +253,6 @@ class OrdersAction extends BaseAction {
 		if(floor($endTime)<$endTime){
 			$cendTime = $cendTime + 2;
 		}
-
 		$this->assign("startTime",$cstartTime);
 		$this->assign("endTime",$cendTime);
 		$this->assign("shopColleges",$shopColleges);

@@ -384,10 +384,10 @@
 	function subCheckArea(){
 	    var communityId = $("#consignee_add_CommunityId").val();
 	    <volist name="shopColleges" key="key" id="shopCollege">
-			var shopCollege = ',{$shopCollege},';
+			var shopCollege = ',{$shopCollege.communitysId},';
 			var idx = shopCollege.indexOf(","+communityId+",");
-			
-			if(idx==-1){
+			var isSlef = {$shopCollege.isSelf};
+			if(idx==-1 && isSlef == 0){
 				$("#areaOk").val("0");	
 				WST.msg("店铺“"+$("#sp_{$key-1}").html()+"”中的商品不在配送区域内！");
 				return false;
@@ -400,9 +400,10 @@
 	function checkArea(obj){
 		var communityId = $("#consignee_add_CommunityId").val();
 		<volist name="shopColleges" key="key" id="shopCollege">
-			var shopCollege = ',{$shopCollege},';					
+			var shopCollege = ',{$shopCollege.communitysId},';
 			var idx = shopCollege.indexOf(","+communityId+",");
-			if(idx==-1){
+			var isSlef = {$shopCollege.isSelf};
+			if(idx==-1 && isSlef == 0){
 				$("#areaOk").val("0");
 				WST.msg("店铺“"+$("#sp_{$key-1}").html()+"”中的商品不在配送区域内！");
 				return false;
