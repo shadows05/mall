@@ -259,6 +259,7 @@ function editGoods(menuId){
 	   params.goodsDesc = $('#goodsDesc').val();
 	   params.attrCatId = $('#attrCatId').val();
 	   params.goodsKeywords = $('#goodsKeywords').val();
+	   params.availableVoucher = $('#availableVoucher').val();
 	   if(params.attrCatId>0){
 		   params.priceAttrId = $('.hiddenPriceAttr').attr('dataId');
 		   params.goodsPriceNo = $('.hiddenPriceAttr').attr('dataNo');

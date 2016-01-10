@@ -77,9 +77,17 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<div class="des-chux">
-											价格：<span id='shopGoodsPrice_{$goodsDetails["goodsId"]}' dataId='{$goodsDetails["goodsAttrId"]}'>￥{$goodsDetails["shopPrice"]}</span>
+										<div class="des-chux" style="margin-bottom: 1px;">
+											市场价格：<span style="text-decoration:line-through;">￥{$goodsDetails["marketPrice"]}</span>
 										</div>
+										<div class="des-chux" style="margin-top: 1px;margin-bottom: 1px;">
+											会员价格：<span id='shopGoodsPrice_{$goodsDetails["goodsId"]}' dataId='{$goodsDetails["goodsAttrId"]}'>￥{$goodsDetails["shopPrice"]}</span>
+										</div>
+										<if condition="$goodsDetails.availableVoucher gt 0">
+											<div class="des-chux" style="margin-top: 1px;">
+												可用代金券：<span id='shopvailableVoucher_{$goodsDetails["goodsId"]}' dataId='{$goodsDetails["goodsAttrId"]}'>￥{$goodsDetails["availableVoucher"]}</span>
+											</div>
+										</if>
 									</td>
 								</tr>
 								<tr>

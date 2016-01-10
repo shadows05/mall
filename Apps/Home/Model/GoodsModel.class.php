@@ -367,6 +367,7 @@ class GoodsModel extends BaseModel {
 		$data["isRecomm"] = (int)I("isRecomm");
 		$data["isNew"] = (int)I("isNew");
 		$data["isHot"] = (int)I("isHot");
+		$data["availableVoucher"] = (int)I("availableVoucher");
 	    //如果商家状态不是已审核则所有商品只能在仓库中
 	    if($shopStatus[0]['shopStatus']==1){
 			$data["isSale"] = (int)I("isSale");
@@ -501,6 +502,7 @@ class GoodsModel extends BaseModel {
 		$data["isRecomm"] = (int)I("isRecomm");
 		$data["isNew"] = (int)I("isNew");
 		$data["isHot"] = (int)I("isHot");
+		$data["availableVoucher"] = (int)I("availableVoucher");
 		
 	    //如果商家状态不是已审核则所有商品只能在仓库中
 	    if($shopStatus[0]['shopStatus']==1){
