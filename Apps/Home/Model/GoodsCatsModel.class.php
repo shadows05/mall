@@ -48,7 +48,6 @@ class GoodsCatsModel extends BaseModel {
 							WHERE g.shopId = sp.shopId AND sp.shopStatus = 1 AND g.goodsFlag = 1 AND g.isSale = 1 AND g.goodsStatus = 1 AND g.goodsCatId2 = $cat2Id AND (sp.areaId2=$areaId2 or sp.isSelf=1)
 							ORDER BY g.saleCount desc limit 8";
 
-					echo $sql;
 					$grs = $this->query($sql);
 					foreach ($grs as $gkey => $v){
 						if(intval($v['goodsAttrId'])>0)$grs[$gkey]['shopPrice'] = $v['attrPrice'];
