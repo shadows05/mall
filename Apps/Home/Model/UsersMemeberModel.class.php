@@ -102,7 +102,8 @@ class UsersMemeberModel extends BaseModel
             $left_structure .=  '    <div class="strt-part">'.
                 '			<span class="line-h line-h-r"></span>'.
                 '			<div class="line-v"><span></span></div>'.
-                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=0&level=0").'" ><span class="strt-name">推荐</span></a>'.
+                '	        <div class="strt-name"><table border="1"><tr><th colspan="3">空缺</th></tr><tr><th colspan="3"><a href="'.U("Members/recommendAdd?puid=$uid&bd=0&level=0").'">推荐</a></th></tr><tr><td>0</td><td>0</td><td>0</td></tr></table></div>'.
+//                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=0&level=0").'" ><span class="strt-name">推荐</span></a>'.
                 '		</div>';
         }else{
             $left_user_info = M("users_member")->find($user_ifo["b_left_user_id"]);
@@ -122,7 +123,8 @@ class UsersMemeberModel extends BaseModel
             $middle_structure .=   '    <div class="strt-part">'.
                 '			<span class="line-h line-h-c"></span>'.
                 '			<div class="line-v"><span></span></div>'.
-                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=1&level=0").'" ><span class="strt-name">推荐</span></a>'.
+                '	        <div class="strt-name"><table border="1"><tr><th colspan="3">空缺</th></tr><tr><th colspan="3"><a href="'.U("Members/recommendAdd?puid=$uid&bd=1&level=0").'">推荐</a></th></tr><tr><td>0</td><td>0</td><td>0</td></tr></table></div>'.
+//                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=1&level=0").'" ><span class="strt-name">推荐</span></a>'.
                 '		</div>';
         }else{
             $middle_user_info = M("users_member")->find($user_ifo["b_middle_user_id"]);
@@ -142,7 +144,8 @@ class UsersMemeberModel extends BaseModel
             $right_structure .=   '    <div class="strt-part">'.
                 '			<span class="line-h line-h-l"></span>'.
                 '			<div class="line-v"><span></span></div>'.
-                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=2&level=0").'" ><span class="strt-name">推荐</span></a>'.
+                '	        <div class="strt-name"><table border="1"><tr><th colspan="3">空缺</th></tr><tr><th colspan="3"><a href="'.U("Members/recommendAdd?puid=$uid&bd=2&level=0").'">推荐</a></th></tr><tr><td>0</td><td>0</td><td>0</td></tr></table></div>'.
+//                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=2&level=0").'" ><span class="strt-name">推荐</span></a>'.
                 '		</div>';
         }else{
             $right_user_info = M("users_member")->find($user_ifo["b_right_user_id"]);
@@ -177,7 +180,8 @@ class UsersMemeberModel extends BaseModel
             $left_structure .=  '    <div class="strt-part">'.
                 '			<span class="line-h line-h-r"></span>'.
                 '			<div class="line-v"><span></span></div>'.
-                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=0&level=0").'" ><span class="strt-name">推荐</span></a>'.
+                '	        <div class="strt-name"><table border="1"><tr><th colspan="3">空缺</th></tr><tr><th colspan="3"><a href="'.U("Members/recommendAdd?puid=$uid&bd=0&level=0").'">推荐</a></th></tr><tr><td>0</td><td>0</td><td>0</td></tr></table></div>'.
+//                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=0&level=0").'" ><span class="strt-name">推荐</span></a>'.
                 '		</div>';
         }else{
             $left_user_info = M("users_member")->find($user_ifo["b_left_user_id"]);
@@ -200,7 +204,8 @@ class UsersMemeberModel extends BaseModel
             $middle_structure .=   '    <div class="strt-part">'.
                 '			<span class="line-h line-h-c"></span>'.
                 '			<div class="line-v"><span></span></div>'.
-                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=1&level=0").'" ><span class="strt-name">推荐</span></a>'.
+                '	        <div class="strt-name"><table border="1"><tr><th colspan="3">空缺</th></tr><tr><th colspan="3"><a href="'.U("Members/recommendAdd?puid=$uid&bd=1&level=0").'">推荐</a></th></tr><tr><td>0</td><td>0</td><td>0</td></tr></table></div>'.
+//                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=1&level=0").'" ><span class="strt-name">推荐</span></a>'.
                 '		</div>';
         }else{
             $middle_user_info = M("users_member")->find($user_ifo["b_middle_user_id"]);
@@ -223,7 +228,8 @@ class UsersMemeberModel extends BaseModel
             $right_structure .=   '    <div class="strt-part">'.
                 '			<span class="line-h line-h-l"></span>'.
                 '			<div class="line-v"><span></span></div>'.
-                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=2&level=0").'" ><span class="strt-name">推荐</span></a>'.
+                '	        <div class="strt-name"><table border="1"><tr><th colspan="3">空缺</th></tr><tr><th colspan="3"><a href="'.U("Members/recommendAdd?puid=$uid&bd=2&level=0").'">推荐</a></th></tr><tr><td>0</td><td>0</td><td>0</td></tr></table></div>'.
+//                '			<a href="'.U("Members/recommendAdd?puid=$uid&bd=2&level=0").'" ><span class="strt-name">推荐</span></a>'.
                 '		</div>';
         }else{
             $right_user_info = M("users_member")->find($user_ifo["b_right_user_id"]);
