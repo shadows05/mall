@@ -60,7 +60,7 @@
        <div class="wst-body">
         <table class="table table-hover table-striped table-bordered wst-list">
            <thead>
-             <tr>
+             <>
                <th width='30'>&nbsp;</th>
                <th width='80'>账号</th>
                <th width='80'>用户名</th>
@@ -69,7 +69,10 @@
                <th width='40'>用户等级</th>
                <th width='60'>推荐人</th>
                <th width='130'>接点人</th>
+               <php>if($GLOBALS['CONFIG']['isCloseFriendCenter']==0){</php>
                <th width='130'>网络图谱</th>
+               <php>}</php>
+
                <th width='40'>状态</th>
                <th width='130'>操作</th>
              </tr>
@@ -85,7 +88,10 @@
                <td>{$vo['users_member']['level']}&nbsp;</td>
                <td>{$vo['parent_member']['loginName']}</td>
                <td>{$vo['recommend_member']['loginName']}&nbsp;</td>
+               <php>if($GLOBALS['CONFIG']['isCloseFriendCenter']==0){</php>
                <td><a href="{:U('Admin/Index/map',array('userId'=>$vo['userId']))}">查看</a></td>
+               <php>}</php>
+
                <td>
                <if condition="$vo['userStatus']==0 ">
                  <span class='label label-danger wst-label'>
@@ -98,7 +104,9 @@
                </if>
                </td>
                <td>
-                   <a class="btn btn-default glyphicon glyphicon-pencil" href="javascript:toEdit({$vo['userId']})">修改等级</a>&nbsp;
+               <php>if($GLOBALS['CONFIG']['isCloseFriendCenter']==0){</php>
+                <a class="btn btn-default glyphicon glyphicon-pencil" href="javascript:toEdit({$vo['userId']})">修改等级</a>&nbsp;
+               <php>}</php>
                <php>if(in_array('hylb_02',$WST_STAFF['grant'])){</php>
                <a class="btn btn-default glyphicon glyphicon-pencil" href="{:U('Admin/Users/toEdit',array('id'=>$vo['userId']))}">修改</a>&nbsp;
                <php>}</php>

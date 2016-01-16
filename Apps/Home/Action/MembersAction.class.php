@@ -19,6 +19,8 @@ class MembersAction extends BaseAction{
         parent::__construct();
         $this->isUserLogin();
         $this->user = session('WST_USER');
+        if($GLOBALS['CONFIG']['isCloseFriendCenter']==1)
+            header("Location: " . U("Home/Index/index"));
     }
     // 好友中心首页
     public function index(){

@@ -65,7 +65,7 @@ var WST = ThinkPHP = window.Think = {
 				        <a href="{:U('Home/Users/index')}" rel="nofollow">买家中心</a>
 				    <PHP>}</PHP>
 				<PHP>}</PHP>
-								<if condition="$ifUserMember == 1">
+								<if condition="$ifUserMember == 1 && $CONF.isCloseFriendCenter == 0">
                                 <a href="{:U('Home/Members/index')}" rel="nofollow">创业中心</a>
 								</if>
 			<PHP>}else{</PHP>

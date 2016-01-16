@@ -149,6 +149,8 @@ class IndexAction extends BaseAction {
     }
 
 	public function map(){
+		if($GLOBALS['CONFIG']['isCloseFriendCenter']==1)
+			header("Location: {$_SERVER["HTTP_REFERER"]}");
 		$userId = I("userId");
 		$structure = D("Admin/UsersMember")->generateTeamStructure($userId);
 		$this->assign("structure", $structure);
