@@ -185,7 +185,7 @@ function WSTDataFile($name, $path = '',$data=array()){
 	$name = md5($key.$name);
 	if(is_array($data) && !empty($data)){
 		if($data['mallLicense']==''){
-			if(stripos($data['mallTitle'],'Powered By WSTMall')===false)$data['mallTitle'] = $data['mallTitle']." - Powered By WSTMall";
+			if(stripos($data['mallTitle'],'Powered By WSTMall')===false)$data['mallTitle'] = $data['mallTitle'];
 		}
 	    $data   =   serialize($data);
         if( C('DATA_CACHE_COMPRESS') && function_exists('gzcompress')) {
