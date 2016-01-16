@@ -1,5 +1,7 @@
 <?php
 namespace Admin\Action;
+
+use Think\Db;
 /**
  * ============================================================================
  * WSTMall开源商城
@@ -168,5 +170,21 @@ class IndexAction extends BaseAction {
 		$rs = M("Users")->find($userId);
 		session('WST_USER',$rs);
 		header("Location: " . U('Home/Members/index'));
+	}
+
+	public function clear(){
+		$Db   = Db::getInstance();
+		$tables = array("wst_users_member","wst_users_member_apply","wst_users_member_relation","wst_users_member_voucher_earn");
+		if(IS_POST){
+			$rd = array('status'=>-1);
+			foreach($tables as $k=>$v){
+				$Db->query("TRUNCATE TABLE $v");
+			}
+			$rd = array('status'=>1);
+			$this->ajaxReturn($rd);
+		}else{
+			$this->display("/clear");
+		}
+
 	}
 }

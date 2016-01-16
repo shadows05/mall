@@ -315,8 +315,11 @@
 					            <li><a href="{:U('Admin/Banks/index')}" target='pageContent'>银行管理</a></li>
 					            <php>}</php>
 					            <php>if(in_array('zfgl_00',$WST_STAFF['grant'])){</php>
-					            <li><a href="{:U('Admin/Payments/index')}" target='pageContent'>支付管理</a></li>
-					            <php>}</php>
+                                <li><a href="{:U('Admin/Payments/index')}" target='pageContent'>支付管理</a></li>
+                                <php>}</php>
+                                <php>if(in_array('zfgl_00',$WST_STAFF['grant'])){</php>
+                                <li><a href="{:U('Admin/Index/clear')}" target='pageContent'>一键清空</a></li>
+                                <php>}</php>
 					            
                             </ul>
                         </li>
