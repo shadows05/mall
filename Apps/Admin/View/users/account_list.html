@@ -103,6 +103,11 @@
                <td>
                <php>if(in_array('hyzh_04',$WST_STAFF['grant'])){</php>
                <a class="btn btn-default glyphicon glyphicon-pencil" href="javascript:toEdit({$vo['userId']})">修改</a>&nbsp;
+
+               <php>if($GLOBALS['CONFIG']['isCloseFriendCenter']==0){</php>
+                   <a class="btn btn-primary glyphicon" href="{:U('Admin/Index/toHome',array('userId'=>$vo['userId']))}">进入会员前台</a>
+               <php>}</php>
+
                <php>}</php>
                </td>
              </tr>

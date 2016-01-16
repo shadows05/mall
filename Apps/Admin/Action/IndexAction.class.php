@@ -149,11 +149,24 @@ class IndexAction extends BaseAction {
     }
 
 	public function map(){
-		if($GLOBALS['CONFIG']['isCloseFriendCenter']==1)
-			header("Location: {$_SERVER["HTTP_REFERER"]}");
+		if($GLOBALS['CONFIG']['isCloseFriendCenter']==1) {
+			header("Location: " . U('Admin/Index/toMain'));
+			exit();
+		}
 		$userId = I("userId");
 		$structure = D("Admin/UsersMember")->generateTeamStructure($userId);
 		$this->assign("structure", $structure);
 		$this->display("users/map");
+	}
+
+	public function toHome(){
+		if($GLOBALS['CONFIG']['isCloseFriendCenter']==1) {
+			header("Location: " . U('Admin/Index/toMain'));
+			exit();
+		}
+		$userId = I("userId");
+		$rs = M("Users")->find($userId);
+		session('WST_USER',$rs);
+		header("Location: " . U('Home/Members/index'));
 	}
 }
