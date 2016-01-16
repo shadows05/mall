@@ -51,7 +51,7 @@
 		  		 	</if>
 				</volist>
 			</div>
-		    <div class="navCon-cate fl navCon_on" >
+		    <div class="navCon-cate fl" >
 		      <div class="navCon-cate-title"> <a href="{:U('Home/goods/getGoodsList')}">全部商品分类</a></div>
 		      
 		      	<if condition="$ishome eq 1">
@@ -107,7 +107,7 @@
 		      </div>
 		    </div>
 		    
-		    <div class="navCon-menu fl navCon_on">
+		    <div class="navCon-menu fl">
 		      <ul class="fl">
 		        <volist name=":WSTNavigation(0)" id="vo" >
 		       	<li ><a href="{$vo['navUrl']}" <if condition="$vo['isOpen'] eq 1">target="_blank"</if> <if condition="$vo['active'] eq 1">class="curMenu"</if>>&nbsp;&nbsp;{$vo['navTitle']}&nbsp;&nbsp;</a></li>
