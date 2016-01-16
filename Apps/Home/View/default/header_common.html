@@ -107,7 +107,7 @@
 		      </div>
 		    </div>
 		    
-		    <div class="navCon-menu fl">
+		    <div class="navCon-menu fl navCon_on">
 		      <ul class="fl">
 		        <volist name=":WSTNavigation(0)" id="vo" >
 		       	<li ><a href="{$vo['navUrl']}" <if condition="$vo['isOpen'] eq 1">target="_blank"</if> <if condition="$vo['active'] eq 1">class="curMenu"</if>>&nbsp;&nbsp;{$vo['navTitle']}&nbsp;&nbsp;</a></li>
