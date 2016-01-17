@@ -46,6 +46,9 @@ class UsersAction extends BaseAction {
      * 
      */
 	public function regist(){
+
+		header("Location: " . U("/Home/Index/index"));
+
 		if(isset($_COOKIE["loginName"])){
 			$this->assign('loginName',$_COOKIE["loginName"]);
 		}else{
