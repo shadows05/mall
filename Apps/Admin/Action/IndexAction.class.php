@@ -180,6 +180,9 @@ class IndexAction extends BaseAction {
 			foreach($tables as $k=>$v){
 				$Db->query("TRUNCATE TABLE $v");
 			}
+
+			$Db->query("update wst_users_member set b_left_user_id=0, b_middle_user_id=0,b_right_user_id=0,parentId=0,recommendId=0,reaches=0,level=0");
+
 			$rd = array('status'=>1);
 			$this->ajaxReturn($rd);
 		}else{

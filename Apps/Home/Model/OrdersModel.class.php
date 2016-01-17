@@ -100,13 +100,20 @@ class OrdersModel extends BaseModel {
 	/**
 	 * 提交订单
 	 */
-	public function addOrders($userId,$consigneeId,$payway,$needreceipt,$catgoods,$orderunique,$isself){	
-		
+	public function addOrders($userId,$consigneeId,$payway,$needreceipt,$catgoods,$orderunique,$isself){
+
 		$orderInfos = array();
 		$orderIds = array();
 		$orderNos = array();
 		$remarks = I("remarks");
-		
+
+		// 获取当前用户可用代金券
+		$voucher = 0;
+		$userVoucher = M("users_member")->where("userId = " . $userId )->getField("voucher");
+		if(!empty($userVoucher) && $userVoucher > 0){
+			$voucher  = $userVoucher;
+		}
+
 		$addressInfo = UserAddressModel::getAddressDetails($consigneeId);
         $m = M('orderids');
         $m->startTrans();
@@ -149,7 +156,14 @@ class OrdersModel extends BaseModel {
 			$data["invoiceClient"] = I("invoiceClient");
 			$data["isAppraises"] = 0;
 			$data["isSelf"] = $isself;
-			$data["needPay"] = $shopgoods["totalMoney"]+$deliverMoney;
+
+			$voucher_money = $shopgoods["voucherMoney"];
+
+			$data["voucherMoney"] = ( $voucher > $voucher_money ) ? $voucher_money : $voucher;
+
+			$voucher = $voucher - $data["voucherMoney"];
+
+			$data["needPay"] = $shopgoods["totalMoney"]+$deliverMoney-$data["voucherMoney"];
 
 			$data["createTime"] = date("Y-m-d H:i:s");
 			
@@ -162,8 +176,11 @@ class OrdersModel extends BaseModel {
 			$data["orderunique"] = $orderunique;
 			$data["isPay"] = 0;
 			$morders = M('orders');
-			$orderId = $morders->add($data);	
-			
+			$orderId = $morders->add($data);
+
+			// 更新用户代金券
+			$sql="update __PREFIX__users_member set voucher=voucher-".$data["voucherMoney"]." where userId=".$userId;
+			$this->execute($sql);
 			
 			$orderNos[] = $data["orderNo"];
 			$orderInfos[] = array("orderId"=>$orderId,"orderNo"=>$data["orderNo"]) ;
@@ -655,16 +672,23 @@ class OrdersModel extends BaseModel {
 		$orderId = (int)$obj["orderId"];
 		$rsdata = array('status'=>-1);
 		//判断订单状态，只有符合状态的订单才允许改变
-		$sql = "SELECT orderId,orderNo,orderStatus FROM __PREFIX__orders WHERE orderId = $orderId and orderFlag = 1 and userId=".$userId;		
+		$sql = "SELECT orderId,orderNo,orderStatus,voucherMoney FROM __PREFIX__orders WHERE orderId = $orderId and orderFlag = 1 and userId=".$userId;
 		$rsv = $this->queryRow($sql);
-		$cancelStatus = array(0,1,2,-2);//未受理,已受理,打包中,待付款订单
+		//$cancelStatus = array(0,1,2,-2);//未受理,已受理,打包中,待付款订单
+		$cancelStatus = array(0,-2);//未受理,待付款订单
 		if(!in_array($rsv["orderStatus"], $cancelStatus))return $rsdata;
 		//如果是未受理和待付款的订单直接改为"用户取消【受理前】"，已受理和打包中的则要改成"用户取消【受理后-商家未知】"，后者要给商家知道有这么一回事，然后再改成"用户取消【受理后-商家已知】"的状态
 		$orderStatus = -6;//取对商家影响最小的状态
 		if($rsv["orderStatus"]==0 || $rsv["orderStatus"]==-2)$orderStatus = -1;
 		if($orderStatus==-6 && I('rejectionRemarks')=='')return $rsdata;//如果是受理后取消需要有原因
 		$sql = "UPDATE __PREFIX__orders set orderStatus = ".$orderStatus." WHERE orderId = $orderId and userId=".$userId;	
-		$rs = $this->execute($sql);		
+		$rs = $this->execute($sql);
+
+		// 如果有代金券支付则更新用户可用代金券
+		if($rsv["voucherMoney"] > 0){
+			$sql = "UPDATE __PREFIX__users_member set voucher =  voucher + ".$rsv["voucherMoney"]." WHERE userId=".$userId;
+			$this->execute($sql);
+		}
 		
 		$sql = "select ord.deliverType, ord.orderId, og.goodsId ,og.goodsId, og.goodsNums 
 				from __PREFIX__orders ord , __PREFIX__order_goods og 
