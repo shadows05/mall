@@ -28,6 +28,7 @@ class BaseAction extends Controller {
    		$this->assign('template_path',$template_path);
    		$this->assign('CONF',$GLOBALS['CONFIG']);
 		$this->assign('ifUserMember', $this->ifUserMember());
+		$this->assign('memberVoucher', $this->getMemberVoucher());
 		$this->assign('user_level', $this->getUserLevel());
 		$this->footer(); //加入底部
 	}
@@ -44,6 +45,16 @@ class BaseAction extends Controller {
 		return $level;
 	}
 
+	public function getMemberVoucher(){
+		$USER = session('WST_USER');
+		$userId = $USER["userId"];
+		$userMember = M("users_member")->find($userId);
+		if(!empty($userMember)){
+			return $userMember["voucher"] > 0 ? $userMember["voucher"]." 元代金券" : "0 元代金券";
+		}else{
+			return "0 元代金券";
+		}
+	}
 	public function ifUserMember(){
 		$USER = session('WST_USER');
 		$userId = $USER["userId"];
