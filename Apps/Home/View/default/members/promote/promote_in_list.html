@@ -6,7 +6,7 @@
             <thead>
             <tr>
                 <th width='30'>&nbsp;</th>
-                <th width='120'>申请人</th>
+                <th width='120'>申请人手机号</th>
                 <th width='120'>申请人微信</th>
                 <th width='120'>内容</th>
                 <th width='160'>申请时间</th>
@@ -18,7 +18,7 @@
             <volist name="list" id="vo" key='i'>
                 <tr>
                     <td>{$i}</td>
-                    <td>{$vo['apply_user']['loginName']}</td>
+                    <td>{$vo['apply_user']['userPhone']}</td>
                     <td>{$vo['apply_user']['userWebchat']}&nbsp;</td>
                     <td>{$vo['apply_conten']}</td>
                     <td>{$vo['create_time']}&nbsp;</td>

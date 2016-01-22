@@ -6,9 +6,9 @@
             <thead>
             <tr>
                 <th width='30'>&nbsp;</th>
-                <th width='120'>被推荐人</th>
+                <th width='120'>被推荐人手机号</th>
                 <th width='120'>被推荐人微信</th>
-                <th width='120'>推荐人</th>
+                <th width='120'>推荐人手机号</th>
                 <th width='120'>推荐人微信</th>
                 <th width='160'>申请时间</th>
                 <th width='100'>状态</th>
@@ -19,9 +19,9 @@
             <volist name="list" id="vo" key='i'>
                 <tr>
                     <td>{$i}</td>
-                    <td>{$vo['cuser']['loginName']}</td>
+                    <td>{$vo['cuser']['userPhone']}</td>
                     <td>{$vo['cuser']['userWebchat']}&nbsp;</td>
-                    <td>{$vo['ruser']['loginName']}</td>
+                    <td>{$vo['ruser']['userPhone']}</td>
                     <td>{$vo['ruser']['userWebchat']}&nbsp;</td>
                     <td>{$vo['create_time']}&nbsp;</td>
                     <td>

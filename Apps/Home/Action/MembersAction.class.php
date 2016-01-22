@@ -281,47 +281,47 @@ class MembersAction extends BaseAction{
         {
             case 0:
                 $user_info["user_title"] = "上一层1级会员";
-                $user_info["update_tips"] = "需要向上一层1级会员发600元红包";
+                $user_info["update_tips"] = "需要向上一层1级会员发600元感恩奖";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,1);
                 break;
             case 1:
                 $user_info["user_title"] = "上二层2级会员";
-                $user_info["update_tips"] = "需要向上二层2级会员发600元红包";
+                $user_info["update_tips"] = "需要向上二层2级会员发600元感恩奖";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,2);
                 break;
             case 2:
                 $user_info["user_title"] = "上三层3级会员";
-                $user_info["update_tips"] = "需要向上三层3级会员发600元红包";
+                $user_info["update_tips"] = "需要向上三层3级会员发600元感恩奖";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,3);
                 break;
             case 3:
                 $user_info["user_title"] = "上四层4级会员";
-                $user_info["update_tips"] = "需要向上四层4级会员发600元红包";
+                $user_info["update_tips"] = "需要向上四层4级会员发600元感恩奖";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,4);
                 break;
             case 4:
                 $user_info["user_title"] = "上五层5级会员";
-                $user_info["update_tips"] = "需要向上五层5级会员发600元红包";
+                $user_info["update_tips"] = "需要向上五层5级会员发600元感恩奖";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,5);
                 break;
             case 5:
                 $user_info["user_title"] = "上六层6级会员";
-                $user_info["update_tips"] = "需要向上六层6级会员发1200元红包";
+                $user_info["update_tips"] = "需要向上六层6级会员发1200元感恩奖";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,6);
                 break;
             case 6:
                 $user_info["user_title"] = "上七层7级会员";
-                $user_info["update_tips"] = "需要向上七层7级会员发1200元红包";
+                $user_info["update_tips"] = "需要向上七层7级会员发1200元感恩奖";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,7);
                 break;
             case 7:
                 $user_info["user_title"] = "上八层8级会员";
-                $user_info["update_tips"] = "需要向上八层8级会员发1200元红包";
+                $user_info["update_tips"] = "需要向上八层8级会员发1200元感恩奖";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,8);
                 break;
             case 8:
                 $user_info["user_title"] = "上九层9级会员";
-                $user_info["update_tips"] = "需要向上九层9级会员发1200元红包";
+                $user_info["update_tips"] = "需要向上九层9级会员发1200元感恩奖";
                 $user_info["update_confirm_cust"] = $this->getUpdateConfirmUser($userId,9);
                 break;
             default:
