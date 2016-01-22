@@ -290,6 +290,7 @@
                                 <div class="wst-chkod-glist-tt2">商品单价</div>
                                 <div class="wst-chkod-glist-tt3">数量</div>
                                 <div class="wst-chkod-glist-tt4">总价</div>
+								<div class="wst-chkod-glist-tt4">最大可用代金券</div>
                                 <div class="wst-chkod-glist-tt5">库存状态</div>
                                 <div class="wst-clear"></div>
                             </div>
@@ -311,6 +312,7 @@
                                     <div class="wst-chkod-od-crt1">¥{$goods["shopPrice"]}元</div>
                                     <div class="wst-chkod-od-crt2">{$goods['cnt']}</div>
                                     <div class="wst-chkod-od-crt3">¥{$goods["shopPrice"]*$goods['cnt']}元</div>
+									<div class="wst-chkod-od-crt3">¥{$goods["availableVoucher"]*$goods['cnt']}元</div>
                                     <div class="wst-chkod-od-crt4">
 	                                    <if condition="$goods['goodsStock'] egt $goods['cnt']">
 	                                    	有货
@@ -349,12 +351,21 @@
                     </div>
                     <div class="checkout-buttons group" id="checkout-floatbar">
                         <div class="sticky-placeholder hide" style="display: none;"></div>
+						<div class="wst-chkod-yf1">
+                        	<span class="total">可用代金券总数：<span style="color: red;">
+	                                <strong id="canUseVoucherId">￥
+										<span id="canUseVoucherId_span">{$canUseVoucher}</span>
+									</strong>元</span>
+                                </span>
+						</div>
                         <div class="wst-chkod-yf1">
                         	<span class="total">应付总额：<span style="color: red;">
 	                                <strong id="payPriceId">￥
 	                                	<input type="hidden" id="gtotalMoney" value="{$gtotalMoney}"/>
 	                                	<input type="hidden" id="totalMoney" value="{$totalMoney}"/>
-		                                <span id="totalMoney_span">{$totalMoney}</span>
+										<input type="hidden" id="totalMoneyVoucher" value="{$totalMoneyVoucher}"/>
+										<input type="hidden" id="canUseVoucher" value="{$canUseVoucher}"/>
+		                                <span id="totalMoney_span">{$totalMoneyVoucher}</span>
 	                                </strong>元</span>
                                 </span>
                         </div>

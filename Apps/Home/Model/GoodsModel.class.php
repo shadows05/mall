@@ -201,7 +201,7 @@ class GoodsModel extends BaseModel {
     public function getGoodsForCheck($obj){		
 		$goodsId = (int)$obj["goodsId"];
 		$goodsAttrId = (int)$obj["goodsAttrId"];
-		$sql = "SELECT sc.catName,sc2.catName as pCatName, g.attrCatId,g.goodsThums,g.goodsId,g.goodsName,g.shopPrice,g.goodsStock
+		$sql = "SELECT sc.catName,sc2.catName as pCatName, g.attrCatId,g.goodsThums,g.goodsId,g.goodsName,g.shopPrice,g.goodsStock,g.availableVoucher
 				,g.shopId,shop.shopName,shop.qqNo,shop.deliveryType,shop.shopAtive,shop.shopTel,shop.shopAddress,shop.deliveryTime,shop.isInvoice, 
 				shop.deliveryStartMoney,g.goodsStock,shop.deliveryFreeMoney,shop.deliveryMoney ,g.goodsSn,shop.serviceStartTime startTime,shop.serviceEndTime endTime
 				FROM __PREFIX__goods g, __PREFIX__shops shop, __PREFIX__shops_cats sc 
@@ -890,7 +890,7 @@ class GoodsModel extends BaseModel {
 	 * 查询商品简单信息
 	 */
 	public function getGoodsSimpInfo($goodsId,$goodsAttrId){
-		$sql = "SELECT g.*,sp.shopId,sp.shopName,sp.deliveryFreeMoney,sp.deliveryMoney,sp.deliveryStartMoney,sp.isInvoice,sp.serviceStartTime startTime,sp.serviceEndTime endTime,sp.deliveryType 
+		$sql = "SELECT g.*,sp.shopId,sp.shopName,sp.deliveryFreeMoney,sp.deliveryMoney,sp.deliveryStartMoney,sp.isInvoice,sp.serviceStartTime startTime,sp.serviceEndTime endTime,sp.deliveryType,g.availableVoucher
 				FROM __PREFIX__goods g, __PREFIX__shops sp 
 				WHERE g.shopId = sp.shopId AND g.goodsId = $goodsId AND g.isSale=1 AND g.goodsFlag = 1 AND g.goodsStatus = 1";
 		$rs = $this->queryRow($sql);

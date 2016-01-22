@@ -170,6 +170,8 @@ class OrdersAction extends BaseAction {
 		$maddress = D('Home/UserAddress');
 		$gtotalMoney = 0;//商品总价（去除配送费）
 		$totalMoney = 0;//商品总价（含配送费）
+		$totalMoneyVoucher = 0;//商品总金额（除去可用代金券之后的总金额）
+		$totalVoucher = 0;//可用代金券总额
 		$totalCnt = 0;
 		$shopcat = session("WST_CART")?session("WST_CART"):array();
 		$catgoods = array();
@@ -199,6 +201,7 @@ class OrdersAction extends BaseAction {
 				$totalCnt += $cgoods["cnt"];
 				$totalMoney += $goods["cnt"]*$goods["shopPrice"];
 				$gtotalMoney += $goods["cnt"]*$goods["shopPrice"];
+				$totalVoucher += $goods["cnt"]*$goods["availableVoucher"];
 				$ommunitysId = $maddress->getShopCommunitysId($goods["shopId"]);
 				$shopColleges[$goods["shopId"]]["communitysId"] = $ommunitysId;
 				$shopColleges[$goods["shopId"]]["isSelf"] = M("shops")->where("shopId=".$goods["shopId"])->getField("isSelf");
@@ -253,12 +256,25 @@ class OrdersAction extends BaseAction {
 		if(floor($endTime)<$endTime){
 			$cendTime = $cendTime + 2;
 		}
+
+		// 获取当前用户可用代金券
+		$voucher = 0;
+		$userVoucher = M("users_member")->where("userId = " . (int)$USER['userId'] )->getField("voucher");
+		if(!empty($userVoucher) && $userVoucher > 0){
+			$voucher  = $userVoucher;
+		}
+
+		$totalMoneyVoucher = ( $voucher > $totalVoucher )? $totalVoucher : $voucher; // 代金券可以用来支付的金额
+
 		$this->assign("startTime",$cstartTime);
 		$this->assign("endTime",$cendTime);
 		$this->assign("shopColleges",$shopColleges);
 		$this->assign("catgoods",$catgoods);
 		$this->assign("gtotalMoney",$gtotalMoney);
 		$this->assign("totalMoney",$totalMoney);
+		$this->assign("totalVoucher", $totalVoucher); // 可用代金券替换的金额
+		$this->assign("canUseVoucher", $totalMoneyVoucher); // 用户可用代金券
+		$this->assign("totalMoneyVoucher", $totalMoney - $totalMoneyVoucher); // 最终需要支付的总金额
 		$this->display('default/check_order');
 	}
 	
@@ -273,6 +289,8 @@ class OrdersAction extends BaseAction {
 		$goodsmodel = D('Home/Goods');
 		$morders = D('Home/Orders');
 		$totalMoney = 0;
+		$totalMoneyVoucher = 0;//商品总金额（除去可用代金券之后的总金额）
+		$totalVoucher = 0;//可用代金券总额
 		$totalCnt = 0;
 		$userId = (int)$USER['userId'];
 		
@@ -317,11 +335,13 @@ class OrdersAction extends BaseAction {
 						$goods["cnt"] = $cgoods["cnt"];
 						$totalCnt += $cgoods["cnt"];
 						$totalMoney += $goods["cnt"]*$goods["shopPrice"];
+						$totalVoucher += $goods["cnt"]*$goods["availableVoucher"];
 						$catgoods[$goods["shopId"]]["shopgoods"][] = $goods;
 						$catgoods[$goods["shopId"]]["deliveryFreeMoney"] = $goods["deliveryFreeMoney"];//店铺免运费最低金额
 						$catgoods[$goods["shopId"]]["deliveryMoney"] = $goods["deliveryMoney"];//店铺免运费最低金额
 						$catgoods[$goods["shopId"]]["totalCnt"] = $catgoods[$goods["shopId"]]["totalCnt"]+$cgoods["cnt"];
 						$catgoods[$goods["shopId"]]["totalMoney"] = $catgoods[$goods["shopId"]]["totalMoney"]+($goods["cnt"]*$goods["shopPrice"]);
+						$catgoods[$goods["shopId"]]["voucherMoney"] = $catgoods[$goods["shopId"]]["voucherMoney"]+($goods["cnt"]*$goods["availableVoucher"]);
 					}
 				}
 				foreach($catgoods as $key=> $cshop){
@@ -331,7 +351,16 @@ class OrdersAction extends BaseAction {
 						}
 					}
 				}
-				
+
+				// 获取当前用户可用代金券
+				$voucher = 0;
+				$userVoucher = M("users_member")->where("userId = " . (int)$USER['userId'] )->getField("voucher");
+				if(!empty($userVoucher) && $userVoucher > 0){
+					$voucher  = $userVoucher;
+				}
+
+				$totalMoneyVoucher = ( $voucher > $totalVoucher )? $totalVoucher : $voucher; // 代金券可以用来支付的金额
+
 				$ordersInfo = $morders->addOrders($userId,$consigneeId,$payway,$needreceipt,$catgoods,$orderunique,$isself);
 				$newcart = array();
 				foreach($shopcat as $key=>$cgoods){
@@ -346,7 +375,10 @@ class OrdersAction extends BaseAction {
 				$this->assign("orderInfos",$ordersInfo["orderInfos"]);
 				$this->assign("isMoreOrder",(count($ordersInfo["orderInfos"])>0)?1:0);
 				$this->assign("orderNos",implode(",",$orderNos));
-				$this->assign("totalMoney",$totalMoney);
+				$this->assign("totalMoney",$totalMoney - $totalMoneyVoucher);
+				$this->assign("totalVoucher", $totalVoucher); // 可用代金券替换的金额
+				$this->assign("canUseVoucher", $voucher); // 用户可用代金券
+				$this->assign("totalMoneyVoucher", $totalMoneyVoucher); //
 				if($payway==0){
 					$this->display('default/order_success');	
 				}else{

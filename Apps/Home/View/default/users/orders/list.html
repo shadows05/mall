@@ -6,11 +6,15 @@
        
 	   <div class="wst-order-userinfo-box" style="">
 	   		<div class="wst-userimg-box">
-	   			<img src="<empty name="WST_USER['userPhoto']">__ROOT__/Apps/Home/View/default/images/logo.png<else/>__ROOT__/{$WST_USER['userPhoto']}</empty>" height="100" width="100" />
+				<empty name="WST_USER['userPhoto']">
+				<else/>
+					<img src="__ROOT__/{$WST_USER['userPhoto']}" height="100" width="100" />
+				</empty>
 	   		</div>
 	   		<div class="wst-userlogin-box">
 	   			<div><span style="font-size:16px;">欢迎您：</span><span style="font-weight:bolder;color:#fff100;">{$WST_USER["loginName"]}</span><if condition='$WST_USER["userRank"]["rankName"] neq ""'>({$WST_USER["userRank"]['rankName']})</if></div>
-	   			<div>上次登录时间：{$WST_USER["lastTime"]}</div>
+				<div><span style="font-size:16px;">我的资产：</span><span style="font-weight:bolder;color:#fff100;">{$memberVoucher}</span></div>
+				<div>上次登录时间：{$WST_USER["lastTime"]}</div>
 	   			<div>上次登录IP：{$WST_USER["lastIP"]}</div>
 	   			<div class="wst-user-adr">
 	   				<a style="color:#ffffff;" href="{:U('Home/UserAddress/queryByPage/')}">我的收货地址</a>&nbsp;&nbsp;&nbsp;
