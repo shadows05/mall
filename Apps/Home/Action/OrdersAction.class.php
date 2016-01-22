@@ -171,7 +171,7 @@ class OrdersAction extends BaseAction {
 		$gtotalMoney = 0;//商品总价（去除配送费）
 		$totalMoney = 0;//商品总价（含配送费）
 		$totalCnt = 0;
-		$shopcat = session("WST_CART")?session("WST_CART"):array();	
+		$shopcat = session("WST_CART")?session("WST_CART"):array();
 		$catgoods = array();
 	
 		$shopColleges = array();
