@@ -63,7 +63,7 @@ class IndexAction extends BaseAction {
     /**
      * 跳去登录页面
      */
-    public function toLogin(){
+    public function toLoginLogin(){
     	$this->display("/login");
     }
     /**

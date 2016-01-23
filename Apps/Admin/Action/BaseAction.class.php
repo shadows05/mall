@@ -76,7 +76,7 @@ class BaseAction extends Controller {
      */
     public function isLogin(){
     	$s = session('WST_STAFF');
-        if(empty($s))$this->redirect("Index/toLogin");
+        if(empty($s))$this->redirect("Index/toLoginLogin");
     }
     /**
      * 跳转权限操作
