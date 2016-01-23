@@ -61,10 +61,12 @@
             <a style="display:block;" href="{:U('Home/Users/toEdit/')}"><li <if condition='$umark eq "toEditUser"'> class='selected'</if>>个人资料</li></a>
             <a style="display:block;" href="{:U('Home/Users/toEditPass/')}"><li <if condition='$umark eq "toEditPass"'> class='selected'</if>>修改密码</li></a>
             <if condition='$WST_USER["userType"] eq 0'>
+                <PHP>if(session('WST_USER.userType')==0 && $user_level >= 2 ){</PHP>
                 <div class="wst-appsaler">
                     <div>您目前不是卖家，您可以</div>
                     <div><a style="display:block;" href="{:U('Home/Shops/toOpenShopByUser/')}"><img src="__ROOT__/Apps/Home/View/default/images/btn_setshop.png" height="38" width="134" /></a></div>
                 </div>
+                <PHP>}else{</PHP>
             </if>
         </div>
         <div class='wst-content'>
