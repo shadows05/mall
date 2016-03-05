@@ -181,7 +181,16 @@ class OrdersModel extends BaseModel {
 			// 更新用户代金券
 			$sql="update __PREFIX__users_member set voucher=voucher-".$data["voucherMoney"]." where userId=".$userId;
 			$this->execute($sql);
-			
+
+			// 生成代金券使用记录
+			M("users_member_voucher_consum")->add(array(
+				"uid"=>$userId,
+				"voucher"=>$data["voucherMoney"],
+				"target_id"=>$orderId,
+				"type"=>1,
+				"status"=>0,
+				"create_time"=>date('Y-m-d H:i:s'),"update_time"=>date('Y-m-d H:i:s')));
+
 			$orderNos[] = $data["orderNo"];
 			$orderInfos[] = array("orderId"=>$orderId,"orderNo"=>$data["orderNo"]) ;
 			//订单创建成功则建立相关记录
@@ -688,6 +697,8 @@ class OrdersModel extends BaseModel {
 		if($rsv["voucherMoney"] > 0){
 			$sql = "UPDATE __PREFIX__users_member set voucher =  voucher + ".$rsv["voucherMoney"]." WHERE userId=".$userId;
 			$this->execute($sql);
+			$sql_consum = "UPDATE __PREFIX__users_member_voucher_consum set status = -1 WHERE uid=".$userId." AND target_id=".$orderId;
+			$this->execute($sql_consum);
 		}
 		
 		$sql = "select ord.deliverType, ord.orderId, og.goodsId ,og.goodsId, og.goodsNums 
@@ -723,7 +734,7 @@ class OrdersModel extends BaseModel {
 		$orderId = (int)$obj["orderId"];
 		$type = (int)$obj["type"];
 		$rsdata = array();
-		$sql = "SELECT orderId,orderNo,orderScore,orderStatus FROM __PREFIX__orders WHERE orderId = $orderId and userId=".$userId;		
+		$sql = "SELECT orderId,orderNo,orderScore,orderStatus,needPay FROM __PREFIX__orders WHERE orderId = $orderId and userId=".$userId;
 		$rsv = $this->queryRow($sql);
 		if($rsv["orderStatus"]!=3){
 			$rsdata["status"] = -1;
@@ -740,6 +751,14 @@ class OrdersModel extends BaseModel {
         	
         	$sql = "UPDATE __PREFIX__users set userScore=userScore+".$rsv["orderScore"]." WHERE userId=".$userId;
         	$rs = $this->execute($sql);
+
+			// 修改用户积分消耗
+			$sql_consum = "UPDATE __PREFIX__users_member_voucher_consum set status = 1 WHERE uid=".$userId." AND target_id=".$orderId;
+			$this->execute($sql_consum);
+
+			// 生成用户购买积分
+			$this->generateBuyVoucher($userId, $orderId, $rsv["needPay"]);
+
         }else{
         	if(I('rejectionRemarks')=='')return $rsdata;//如果是拒收的话需要填写原因
         	$sql = "UPDATE __PREFIX__orders set orderStatus = -3 WHERE orderId = $orderId and userId=".$userId;			
@@ -756,6 +775,54 @@ class OrdersModel extends BaseModel {
 		$ra = $m->add($data);
 		$rsdata["status"] = $ra;;
 		return $rsdata;
+	}
+
+	/**
+	 * 生成用户购买积分
+	 */
+	private function generateBuyVoucher($userId, $orderId, $needPay){
+		// 获取用户的 3级 推荐人
+		$users = array();
+		$users[0] = $userId;
+		$users[1] = $this->getRecommendUserId($users[0]);
+		$users[2] = $this->getRecommendUserId($users[1]);
+		$users[3] = $this->getRecommendUserId($users[2]);
+
+		$vouchers = array();
+		$vouchers[0] = intval($needPay * 0.3);
+		$vouchers[1] = intval($needPay * 0.15);
+		$vouchers[2] = intval($needPay * 0.1);
+		$vouchers[3] = intval($needPay * 0.07);
+
+		for($i = 0; $i < 4; $i++){
+			if($users[$i] > 0 && $vouchers[$i] > 0){
+				// 生成积分记录
+				M("users_member_voucher_earn")->add(array(
+					"uid" => $users[$i],
+					"voucher" => $vouchers[$i],
+					"type" => 2,
+					"target_id" => $orderId,
+					"status" => 1,
+					"create_time" => date('Y-m-d H:i:s'),
+					"update_time" => date('Y-m-d H:i:s')));
+
+				// 更新用户可用voucher
+				$add_sql = "UPDATE __PREFIX__users_member set voucher=voucher+".$vouchers[$i]." WHERE userId=".$users[$i];
+				$rs = $this->execute($add_sql);
+			}
+		}
+
+	}
+
+	/**
+	 * 获取用户推荐人ID
+	 */
+	private function getRecommendUserId($userId){
+		$sql = "SELECT userId,recommendId  FROM __PREFIX__users_member WHERE userId = ".$userId;
+		$rsv = $this->queryRow($sql);
+		if(empty($rsv) || $rsv["recommendId"] == 0)
+			return 0;
+		return $rsv["recommendId"];
 	}
 	
     /**
